@@ -19,8 +19,21 @@ const ulTaskList = () => document.getElementById("task-list")
 
 document.addEventListener("DOMContentLoaded", () => {
     showTasksButton().addEventListener("click", handleClick)
-    // handClick is a callback function --> we do not invoke it here. 
+    // invoking showTasksButton and creating a click event listener
+    // handleClick is a callback function --> we do not invoke it here. 
+
+    addTaskButton().addEventListener("click", newForm)
 })
+
+const newForm = () => {
+    // 1. HTML to show the form
+    // 2. insert onto page?
+    // 3. submit button
+}
+
+const handleSubmit = () => {
+    
+}
 
 const handleClick = () => {
     // anonymous function
@@ -44,7 +57,9 @@ const renderTasks = (tasks) => {
     tasks.forEach(task => {
         const li = document.createElement("li")
         li.innerHTML = `
-            <h2 class="task-name">${task.name}</h2
+            <h2 class="task-name">${task.name}</h2>
+            <p class="task-duedate">${task.due_date}</p>
+            <p class="task-completed">${task.completed}</p>
         `
         ulTaskList().appendChild(li)
     })
@@ -52,7 +67,7 @@ const renderTasks = (tasks) => {
     // creating an element li for each task
     // setting the inner html of each li to the specific task's attrs.
     // appending each task to the page under the specified div
-    
+
 
 }
 
