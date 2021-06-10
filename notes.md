@@ -57,3 +57,5 @@ PROJECT NOTES
     - allows us to quickly map variables to a collection of data
     - 
 19. CONSTRUCTOR FUNCTIONS
+20. event.target
+    - will always return the element that triggered the event
