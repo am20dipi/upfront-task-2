@@ -5,7 +5,7 @@ class TaskNotesController < ApplicationController
   def index
     @task_notes = TaskNote.all
 
-    render json: @task_notes
+    render json: TaskNoteSerializer.new(@task_notes)
   end
 
   # GET /task_notes/1

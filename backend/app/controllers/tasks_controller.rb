@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
 
-    render json: @tasks
+    render json: TaskSerializer.new(@tasks)
   end
 
   # GET /tasks/1
