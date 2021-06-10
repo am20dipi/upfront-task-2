@@ -17,10 +17,10 @@ const ulTaskList = () => document.getElementById("task-list")
 //Forms
 const newTaskForm = () => document.querySelector("#new-task-form")
 const formContainer = () => document.querySelector("#form-container")
-const taskName = () => document.getElementById("#task-name")
-const taskDueDate = () => document.getElementById("#task-due-date")
-const taskCompleted = () => document.getElementById("#task-completed")
-const taskNotes = () => document.getElementById("#task-notes")
+const taskName = () => document.getElementById("task-name")
+const taskDueDate = () => document.getElementById("task-due-date")
+const taskCompleted = () => document.getElementById("task-completed")
+const taskNotes = () => document.getElementById("task-notes")
 
 // 2. Events
     // DOMContentLoaded => when the DOM finishes loading, listen for the specified events 
@@ -43,17 +43,17 @@ const displayNewForm = () => {
     const form = newTaskForm().style.display= 'block';
     form.innerHTML += `
         <label for="name">Name:</label>
-        <input type="text" id="task-name" name="name"><br>
+        <input type="text" id="task-name" name="task-name"><br>
 
         <label for="due_date">Date: </label>
-        <input type="text" id="task-due-date" name="due_date"><br>
+        <input type="text" id="task-due-date" name="due-date"><br>
 
         <label for="completed">Completed: </label>
         <label>Yes</label><input type="checkbox" id="task-completed" name="completed" value ="true">
         <label>No</label><input type="checkbox" id="task-completed" name="completed" value="false"><br>
 
         <label for="task_notes">Notes: </label>
-        <textarea id="task-notes" name="task_notes"></textarea><br><br>
+        <textarea id="task-notes" name="task-notes"></textarea><br><br>
         
         <input type="submit" value="Create Task" id="submit-button">
         `
@@ -77,8 +77,6 @@ const handleSubmit = (e) => {
     }
     // setting object "data" to the values of each input field
     // creating an object with keyvalue pairs
-
-    debugger
      fetch('http://localhost:3000/tasks', {
          method: 'POST',
          headers: {
@@ -90,7 +88,7 @@ const handleSubmit = (e) => {
          // the data being sent back 
          // data object must be stringified, so I use JSON.stringify
      })
-     .then(resp =>resp(json))
+     .then(resp => resp.json())
      .then(json => renderTask(json))
 }
 
