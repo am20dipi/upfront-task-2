@@ -12,7 +12,7 @@ const submitButton = () => document.getElementById("submit-button")
 //Lists
 const listDiv = () => document.getElementById("list")
 const ulTaskList = () => document.getElementById("task-list")
-   
+const taskContainer = () => document.getElementById("task-container")   
 
 //Forms
 const newTaskForm = () => document.querySelector("#new-task-form")
@@ -94,7 +94,18 @@ const handleSubmit = (e) => {
 
 
 const renderTask = (task) => {
-    debugger
+    //debugger
+    let p = document.createElement("p")
+    p.innerHTML += `
+        <div data-id="${task.id}">
+            <h2>${task.name}</h2>
+            <li>${task.due_date}</li>
+            <li>${task.completed}</li>
+            <li>${task.task_notes}</li>
+        </div>
+    `
+    taskContainer().appendChild(p)
+    //newTaskForm.reset()
     
 }
  
