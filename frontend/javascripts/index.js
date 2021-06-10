@@ -25,11 +25,22 @@ document.addEventListener("DOMContentLoaded", () => {
 const handleClick = () => {
     fetch('http://localhost:3000/tasks')
     .then(resp => resp.json())
-    .then(renderTasks)
+    .then(json => renderTasks(json))
     .catch(handleError)
+    //{debugger}
 }
 
 const handleError = (error) => {
     console.log(error)
+}
+
+const renderTasks = (tasks) => {
+    tasks.forEach(task => {
+        const li = document.createElement("li")
+        li.innerHTML = `
+            <h2 class="task-name">${task.name}</h2
+        `
+        ulTaskList.appendChild(li)
+    })
 }
 
