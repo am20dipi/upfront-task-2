@@ -23,10 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const handleClick = () => {
+    // anonymous function
     fetch('http://localhost:3000/tasks')
+    // fetch takes in an endpoint as an argument
+    // fetch returns Promise objects
     .then(resp => resp.json())
+    // taking the response object and parsing it to json format
     .then(json => renderTasks(json))
+    // taking the parsed data and passing it through a function renderTasks
     .catch(handleError)
+    // using .catch to handle errors, passing in a function I created below
     //{debugger}
 }
 
@@ -40,7 +46,13 @@ const renderTasks = (tasks) => {
         li.innerHTML = `
             <h2 class="task-name">${task.name}</h2
         `
-        ulTaskList.appendChild(li)
+        ulTaskList().appendChild(li)
     })
+    // iterating through the array tasks
+    // creating an element li for each task
+    // setting the inner html of each li to the specific task's attrs.
+    // appending each task to the page under the specified div
+    
+
 }
 
