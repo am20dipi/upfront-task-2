@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Task.create!(name: "Go to carwash", due_date: "", completed: true)
+Task.create!(name: "Pick up grandma", due_date: "", completed: true)
+Task.create!(name: "Go to bank", due_date: "Tuesday", completed: false)
+
+
+
+TaskNote.create!(content: "Auto Shine is having a sale on full carwashes.", task_id: 1)
+TaskNote.create!(content: "Bring cash for tip!", task_id: 1)
