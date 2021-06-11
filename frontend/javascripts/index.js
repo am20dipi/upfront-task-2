@@ -130,20 +130,36 @@ const handleError = (error) => {
 
 const renderTasks = (tasks) => {
     // need to ensure that you cannot click render tasks twice and see it twice
-    tasks.forEach(task => {
+    tasks.data.forEach(({attributes}) => {
         const li = document.createElement("li")
         li.innerHTML = `
-            <h2 id="task-name">${task.name}</h2>
+            <h2 id="task-name"><a href="#" id="task-${attributes.id}">${attributes.name}</a></h2>
             <ol>
-                <p id="task-due-date">When: ${task.due_date}</p>
-                <p id="task-completed">Completed? ${task.completed}</p>
+                <p id="task-due-date">When: ${attributes.due_date}</p>
+                <p id="task-completed">Completed? ${attributes.completed}</p>
             </ol>
-            <button class="delete-task" data-id="${task.id}">Delete Task</button>
-            <button class="edit-task" data-id="${task.id}">Edit Task</button>
+            <div id="task-${attributes.id}-notes" class="hidden">
+            
+            </div>
+
+            <button class="delete-task" data-id="${attributes.id}">Delete Task</button>
+            <button class="edit-task" data-id="${attributes.id}">Edit Task</button>
 
         `
+       // debugger
         ulTaskList().appendChild(li)
-        document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
+        document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
+        document.querySelector(`#task-${attributes.id}`).addEventListener("click", () => {
+            
+                const task = document.querySelector(`task-${attributes.id}-notes`)
+                attributes.task_notes.forEach(task_note => {
+                    const li = document.createElement("li")
+                    li.innerText = task_note.content
+
+                    task.appendChild(li)
+                })
+                task.classList.toggle("hidden")
+        })
         // editTaskButton().addEventListener("click", handleEdit)
     })
     

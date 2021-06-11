@@ -5,9 +5,9 @@ class TasksController < ApplicationController
   def index
     tasks = Task.all
     options = {}
-    #options[:include] = [:task_notes]
-    render json: tasks
-    #render json: TaskSerializer.new(tasks)
+    options[:include] = [:task_notes]
+    #render json: tasks
+    render json: TaskSerializer.new(tasks)
     # render json is implicitly invoking a method on its own 
     # render json turns data into JSON
   end
@@ -50,6 +50,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :completed, :due_date, :task_notes)
+      params.require(:task).permit(:name, :completed, :due_date)
     end
 end
