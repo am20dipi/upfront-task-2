@@ -21,14 +21,15 @@
     <div id="form-container">
         <form id="new-task-form" style="display: none;">
             <label for="name">Name:</label>
-            <input type="text" id="task-name" name="task_name"><br>
+            <input type="text" id="task-name" name="task_name"><br><br>
 
             <label for="due_date">Date: </label>
-            <input type="text" id="task-due-date" name="task_due_date"><br>
-
-            <label for="completed">Completed: </label>
-            <label>Yes</label><input type="checkbox" id="task-completed" name="task_completed" value ="Completed">
-            <label>No</label><input type="checkbox" id="task-completed" name="task_completed" value="Not Completed"><br>
+            <input type="text" id="task-due-date" name="task_due_date"><br><br>
+            
+            <label for="task_completed">Completed</label>
+            <input type="checkbox" id="task-completed" name="task_completed" value ="Completed">
+            <label for="task_completed">Not Completed</label>
+            <input type="checkbox" id="task-completed" name="task_completed" value="Not Completed"><br><br>
 
             <label for="task_notes">Notes: </label>
             <textarea id="task-notes" name="task_notes"></textarea><br><br>
@@ -40,8 +41,8 @@
     <div id="task-container">
         
     </div>
-
+    <script src="javascripts/index.js"></script>
 </body>
 
-<script src="javascripts/index.js"></script>
+
 </html>

@@ -136,8 +136,10 @@ const renderTasks = (tasks) => {
         const li = document.createElement("li")
         li.innerHTML = `
             <h2 id="task-name">${task.name}</h2>
-            <p id="task-due-date">${task.due_date}</p>
-            <p id="task-completed">${task.completed}</p>
+            <ol>
+                <p id="task-due-date">When: ${task.due_date}</p>
+                <p id="task-completed">Completed? ${task.completed}</p>
+            </ol>
             <button class="delete-task" data-id="${task.id}">Delete Task</button>
             <button class="edit-task" data-id="${task.id}">Edit Task</button>
 
