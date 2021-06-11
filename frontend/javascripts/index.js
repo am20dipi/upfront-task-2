@@ -29,10 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showTasksButton().addEventListener("click", handleClick)
     // invoking showTasksButton and creating a click event listener
     // handleClick is a callback function --> we do not invoke it here. 
-    
     addTaskButton().addEventListener("click", displayNewForm)
-    
-    //editTaskButton().addEventListener("click", handleEdit)
 })
 
 // 3. Functions
@@ -41,34 +38,33 @@ const displayNewForm = () => {
     // 1. HTML to show the form
     // 2. insert onto page
     // 3. submit button / event listener
-    //debugger
+    // 4. need to insert toggle function
+
     const form = newTaskForm().style.display= 'block';
     form.innerHTML += `
         <label for="name">Name:</label>
-        <input type="text" id="task-name" name="task_name"><br>
+        <input type="text" id="task-name" name="tname"><br>
 
         <label for="due_date">Date: </label>
-        <input type="text" id="task-due-date" name="task_due_date"><br>
+        <input type="text" id="task-due-date" name="due_date"><br>
 
-        <label for="task_completed">Completed: </label>
-        <label>Yes</label><input type="checkbox" id="task_completed" name="task_completed" value ="Completed">
-        <label>No</label><input type="checkbox" id="task_completed" name="task_completed" value="Not Completed"><br>
+        <label for="completed">Completed: </label>
+        <label>Yes</label><input type="checkbox" id="task-completed" name="completed">
+        <label>No</label><input type="checkbox" id="task-completed" name="completed"><br>
 
         <label for="task[task_notes]">Notes: </label>
         <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>
         
         <input type="submit" value="Create Task" id="submit-button">
         `
-    //formContainer().appendChild(form)
     submitButton().addEventListener("click", handleSubmit)
-
 }
 
 const handleSubmit = (e) => {
     // 1. prevent default
     // 2. fetch to endpoint, POST, body, headers
-    // 3. create the new task 
-    // 4. collect form data & send to db
+    // 3. collect form data & send to db
+    // 4. clear form and remove form
     e.preventDefault()
     const data = {
         name: taskName().value,
@@ -95,13 +91,13 @@ const handleSubmit = (e) => {
         renderTask(json)
         document.getElementById("new-task-form").reset();
         document.getElementById("new-task-form").remove();
-        })
+    })
 }
 
 
 const renderTask = (task) => {
     //debugger
-    let p = document.createElement("p")
+    const p = document.createElement("p")
     p.innerHTML += `
         <div data-id="${task.id}">
             <h2>${task.name}</h2>
@@ -126,7 +122,6 @@ const handleClick = () => {
     // taking the parsed data and passing it through a function renderTasks
     .catch(handleError)
     // using .catch to handle errors, passing in a function I created below
-    //{debugger}
 }
 
 const handleError = (error) => {
@@ -134,6 +129,7 @@ const handleError = (error) => {
 }
 
 const renderTasks = (tasks) => {
+    // need to ensure that you cannot click render tasks twice and see it twice
     tasks.forEach(task => {
         const li = document.createElement("li")
         li.innerHTML = `
@@ -148,7 +144,7 @@ const renderTasks = (tasks) => {
         `
         ulTaskList().appendChild(li)
         document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
-        
+        // editTaskButton().addEventListener("click", handleEdit)
     })
     
     // iterating through the array tasks
@@ -166,19 +162,26 @@ const handleDelete = (e) => {
     // 3. method: DELETE, headers?
     // 4. pass in an event bc click = event, event.target == button
     //debugger
+    // 5. alert message? error message?
     fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
         method: 'DELETE',
     })
         .then(resp => resp.json())
         .then(json => {
-            alert(json.message ="Successfully Deleted")
+            alert(json.message="Successfully Deleted")
             e.parentNode.remove()
         })
         .catch(handleError)
     }
 
 
-function handleEdit() {
-    // 1. 
+const handleEdit = () => {
+    // 1. listen/wait for click event
+    // 2. render form with preexisting field input
+}
+
+const handleUpdate = () => {
+    // 1. replace current li with new li 
+    // 2. clear & remove form
 }
 
