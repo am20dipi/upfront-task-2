@@ -13,8 +13,8 @@
     <div id="buttons" class="navbar">
         <button class="show-tasks">Show Tasks</button>
         <button class="add-task" onclick="displayNewForm()">Create a Task</button>
-        <button class="delete-task" data-id="${task.id}">Delete Task</button>
-        <button class="edit-task" data-id="${task.id}">Edit Task</button>
+        <!-- <button class="delete-task" data-id="${task.id}">Delete Task</button>
+        <button class="edit-task" data-id="${task.id}">Edit Task</button> -->
     </div>
     <div id="list">
         <ul id="task-list">
@@ -30,10 +30,9 @@
             <label for="due_date">Date: </label>
             <input type="text" id="task-due-date" name="due_date"><br><br>
             
-            <label for="completed">Completed</label>
-            <input type="checkbox" id="task-completed" name="completed">
-            <label for="completed">Not Completed</label>
-            <input type="checkbox" id="task-completed" name="completed"><br><br>
+            <label>Completed: </label>
+            <label for="completed">Yes</label><input type="checkbox" id="task-completed" name="completed" value="true">
+            <label for="not completed">No</label><input type="checkbox" id="task-completed" name="not completed" value="false"><br>
 
             <label for="task[task_notes]">Notes: </label>
             <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>

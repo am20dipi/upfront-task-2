@@ -31,5 +31,5 @@ ActiveRecord::Schema.define(version: 2021_06_10_184857) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "task_notes", "tasks"
+  add_foreign_key "task_notes", "tasks", on_delete: :cascade
 end
