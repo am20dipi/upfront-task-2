@@ -91,7 +91,10 @@ const handleSubmit = (e) => {
          // data object must be stringified, so I use JSON.stringify
      })
      .then(resp => resp.json())
-     .then(json => renderTask(json))
+     .then(json => {
+        renderTask(json)
+        document.getElementById("new-task-form").reset();
+        })
 }
 
 
@@ -101,14 +104,12 @@ const renderTask = (task) => {
     p.innerHTML += `
         <div data-id="${task.id}">
             <h2>${task.name}</h2>
-            <li>${task.due_date}</li>
-            <li>${task.completed}</li>
-            <li>${task.task_notes}</li>
+            <li>When: ${task.due_date}</li>
+            <li>Completed? ${task.completed}</li>
+            <li>Notes: ${task.task_notes}</li>
         </div>
     `
-    taskContainer().appendChild(p)
-    //newTaskForm.reset()
-    
+    taskContainer().appendChild(p) 
 }
  
 
