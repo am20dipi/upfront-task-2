@@ -152,7 +152,7 @@ const renderTasks = (tasks) => {
     // setting the inner html of each li to the specific task's attrs.
     // appending each task to the page under the specified parent 
     // selecting the delete button of that instance and adding event listener
-    
+
 }
 
 
@@ -161,16 +161,17 @@ const handleDelete = (e) => {
     // 2. remove from page
     // 3. method: DELETE, headers?
     // 4. pass in an event bc click = event, event.target == button
-    debugger
+    //debugger
     fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
         method: 'DELETE',
-        headers: {
-            "Content-Type": 'application/json'
-        }
     })
-        .then(resp => {debugger})
-        //.then(json => alert(json.message))
-        //.then(json => e.target.parentNode.remove())
+        .then(resp => resp.json())
+        .then(json => {
+            alert(json.message)
+            e.parentNode.remove()
+            renderTasks()
+        })
+        .catch(handleError)
     }
 
 
