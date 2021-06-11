@@ -45,17 +45,17 @@ const displayNewForm = () => {
     const form = newTaskForm().style.display= 'block';
     form.innerHTML += `
         <label for="name">Name:</label>
-        <input type="text" id="task-name" name="task-name"><br>
+        <input type="text" id="task-name" name="task_name"><br>
 
         <label for="due_date">Date: </label>
-        <input type="text" id="task-due-date" name="due-date"><br>
+        <input type="text" id="task-due-date" name="task_due_date"><br>
 
-        <label for="completed">Completed: </label>
-        <label>Yes</label><input type="checkbox" id="task-completed" name="completed" value ="true">
-        <label>No</label><input type="checkbox" id="task-completed" name="completed" value="false"><br>
+        <label for="task_completed">Completed: </label>
+        <label>Yes</label><input type="checkbox" id="task_completed" name="task_completed" value ="Completed">
+        <label>No</label><input type="checkbox" id="task_completed" name="task_completed" value="Not Completed"><br>
 
-        <label for="task_notes">Notes: </label>
-        <textarea id="task-notes" name="task-notes"></textarea><br><br>
+        <label for="task[task_notes]">Notes: </label>
+        <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>
         
         <input type="submit" value="Create Task" id="submit-button">
         `
@@ -171,9 +171,8 @@ const handleDelete = (e) => {
     })
         .then(resp => resp.json())
         .then(json => {
-            alert(json.message)
+            alert(json.message ="Successfully Deleted")
             e.parentNode.remove()
-            renderTasks()
         })
         .catch(handleError)
     }

@@ -3,14 +3,17 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
-
-    render json: @tasks
+    tasks = Task.all
+    options = {}
+    options[:include] = [:task_notes]
+    render json: TaskSerializer.new(tasks)
+    # render json is implicitly invoking a method on its own 
+    # render json turns data into JSON
   end
 
   # GET /tasks/1
   def show
-    render json: @task
+    render json: task
   end
 
   # POST /tasks
