@@ -3,10 +3,10 @@
 
 //Buttons
 const buttonsDiv = () => document.getElementById("buttons")
-const showTasksButton = () => document.getElementById("show-tasks")
-const addTaskButton = () => document.getElementById("add-task")
-const deleteTaskButton = () => document.getElementById("delete-task")
-const editTaskButton = () => document.getElementById("edit-task")
+const showTasksButton = () => document.querySelector(".show-tasks")
+const addTaskButton = () => document.querySelector(".add-task")
+const deleteTaskButton = () => document.querySelector(".delete-task")
+const editTaskButton = () => document.querySelector(".edit-task")
 const submitButton = () => document.getElementById("submit-button")
 
 //Lists
@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // handleClick is a callback function --> we do not invoke it here. 
     
     addTaskButton().addEventListener("click", displayNewForm)
-    deleteTaskButton().addEventListener("click", handleDelete)
-    editTaskButton().addEventListener("click", handleEdit)
+    
+    //editTaskButton().addEventListener("click", handleEdit)
 })
 
 // 3. Functions
@@ -138,37 +138,43 @@ const renderTasks = (tasks) => {
             <h2 id="task-name">${task.name}</h2>
             <p id="task-due-date">${task.due_date}</p>
             <p id="task-completed">${task.completed}</p>
-            <p id="task-notes"><${task.task_notes}</p>
-            <button id="edit-task">Edit Task</button>
-            <button id="delete-task">Delete Task</button>
+            <button class="delete-task" data-id="${task.id}">Delete Task</button>
+            <button class="edit-task" data-id="${task.id}">Edit Task</button>
+
         `
         ulTaskList().appendChild(li)
+        document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
+        
     })
+    
     // iterating through the array tasks
     // creating an element li for each task
     // setting the inner html of each li to the specific task's attrs.
-    // appending each task to the page under the specified div
-
-
+    // appending each task to the page under the specified parent 
+    // selecting the delete button of that instance and adding event listener
+    
 }
 
 
 const handleDelete = (e) => {
     // 1. fetch to specific endpoint specified by id
     // 2. remove from page
-    // 3. method: DELETE, headers, body
-   /*  fetch('http://localhost:3000/tasks/${e.target.dataset.id', {
-        method: "DELETE",
+    // 3. method: DELETE, headers?
+    // 4. pass in an event bc click = event, event.target == button
+    debugger
+    fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
+        method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": 'application/json'
         }
-        .then(resp => resp.json())
-        .then(json => alert(json.message))
-        .then(json => e.target.parentNode.remove())
-    } */
-}
+    })
+        .then(resp => {debugger})
+        //.then(json => alert(json.message))
+        //.then(json => e.target.parentNode.remove())
+    }
 
 
 function handleEdit() {
     // 1. 
 }
+
