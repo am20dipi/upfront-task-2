@@ -94,6 +94,7 @@ const handleSubmit = (e) => {
      .then(json => {
         renderTask(json)
         document.getElementById("new-task-form").reset();
+        document.getElementById("new-task-form").remove();
         })
 }
 
