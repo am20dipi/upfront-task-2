@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // handleClick is a callback function --> we do not invoke it here. 
     
     addTaskButton().addEventListener("click", displayNewForm)
+    deleteTaskButton().addEventListener("click", handleDelete)
+    editTaskButton().addEventListener("click", handleEdit)
 })
 
 // 3. Functions
@@ -136,6 +138,9 @@ const renderTasks = (tasks) => {
             <h2 id="task-name">${task.name}</h2>
             <p id="task-due-date">${task.due_date}</p>
             <p id="task-completed">${task.completed}</p>
+            <p id="task-notes"><${task.task_notes}</p>
+            <button id="edit-task">Edit Task</button>
+            <button id="delete-task">Delete Task</button>
         `
         ulTaskList().appendChild(li)
     })
@@ -147,3 +152,23 @@ const renderTasks = (tasks) => {
 
 }
 
+
+const handleDelete = (e) => {
+    // 1. fetch to specific endpoint specified by id
+    // 2. remove from page
+    // 3. method: DELETE, headers, body
+   /*  fetch('http://localhost:3000/tasks/${e.target.dataset.id', {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+        }
+        .then(resp => resp.json())
+        .then(json => alert(json.message))
+        .then(json => e.target.parentNode.remove())
+    } */
+}
+
+
+function handleEdit() {
+    // 1. 
+}
