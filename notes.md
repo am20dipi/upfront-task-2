@@ -84,3 +84,6 @@ PROJECT NOTES
     - returns a new array of modified elements
     - "collection processor"
     - SYNTAX =>  array.map(element => test)
+23. e.preventDefault()
+    - preventing default behavior
+    - if the page refreshes, that is a page default
