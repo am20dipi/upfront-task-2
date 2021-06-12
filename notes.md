@@ -86,4 +86,5 @@ PROJECT NOTES
     - SYNTAX =>  array.map(element => test)
 23. e.preventDefault()
     - preventing default behavior
-    - if the page refreshes, that is a page default
+    - if the page refreshes, then you need a preventDefault
+    - typically with forms, or buttons that send you somewhere else(think href)

@@ -13,7 +13,7 @@ const addNoteButton = () => document.querySelector(".add-note")
 //Lists
 const listDiv = () => document.getElementById("list")
 const ulTaskList = () => document.getElementById("task-list")   
-const ulIndividualTask = () => document.querySelector(".individual-task-list")
+const ulIndividualTask = () => document.querySelector("#individual-task-list")
 
 //Forms
 const newTaskForm = () => document.querySelector("#new-task-form")
@@ -138,9 +138,9 @@ const renderTasks = (tasks) => {
         const li = document.createElement("li")
         li.innerHTML = `
             <h2 id="task-name"><a href="#" id="task-${attributes.id}">${attributes.name}</a></h2>
-            <ul class="individual-task-list">
-                <li id="task-due-date">When: ${attributes.due_date}</li>
-                <li id="task-completed">Completed? ${attributes.completed}</li>
+            <ul id"individual-task-list" class="hidden">
+                <li id="task-due-date">${attributes.due_date}</li>
+                <li id="task-completed">${attributes.completed}</li>
             </ul>
             <div id="task-${attributes.id}-notes" class="hidden">
                 <legend><strong>Notes</strong></legend>
@@ -153,7 +153,6 @@ const renderTasks = (tasks) => {
         `
        // debugger
         ulTaskList().appendChild(li)
-
 
         document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
         document.querySelector(`#task-${attributes.id}`).addEventListener("click", () => {
@@ -175,7 +174,7 @@ const renderTasks = (tasks) => {
     // setting the inner html of each li to the specific task's attrs.
     // appending each task to the page under the specified parent 
     // selecting the delete button of that instance and adding event listener
-
+    li.classList.toggle("hidden")
 }
 
 
@@ -201,17 +200,38 @@ const handleDelete = (e) => {
         //.catch(handleError)
     }
 
-
-const handleEdit = () => {
-    
-}
-
 const handleUpdate = (e) => {
     // 1. listen/wait for click event
     // 2. render form with preexisting field input
-    // 3. replace current li with new li 
+    // 3. replace current li with new li, map values
     // 4. clear & remove form
-    console.log(e)
+    debugger
+    if (e.target.innerText === 'Edit Task') {
+        const taskId = e.target.dataset.id
+        const name = e.target.parentElement.querySelector("#task-name").innerText 
+        const dueDate = e.target.parentElement.querySelector("#task-due-date").innerText
+        const completed = e.target.parentElement.querySelector("#task-completed").innerText
+        const notes = e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText
+        e.target.parentElement.innerHTML = `
+            <label for="name">Name:</label>
+            <input type="text" id="task-name" name="name" value='${name}'><br>
+
+            <label for="due_date">Date: </label>
+            <input type="text" id="task-due-date" name="due_date" value='${dueDate}'><br>
+
+            <label>Completed: </label>
+            <label for="completed">Yes</label><input type="checkbox" id="task-completed" name="completed" value='${completed}'>
+            <label for="not completed">No</label><input type="checkbox" id="task-completed" name="not completed"><br>
+
+            <label for="task[task_notes]">Notes: </label>
+            <textarea id="task-notes" name="task[task_notes]" value='${notes}'></textarea><br><br>
+            
+            <button class="edit-task" data-id="${taskId}">Update</button>
+            <button class="delete-task" data-id="${taskId}">Delete</button>
+            `
+    } else {
+
+    }
 }
 
 
