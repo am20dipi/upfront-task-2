@@ -12,34 +12,35 @@
     </div>
     <div id="buttons" class="navbar">
         <button class="show-tasks">Show Tasks</button>
-        <button class="add-task" onclick="displayNewForm()">Create a Task</button>
+        <button class="add-task">Create a Task</button>
         <!-- <button class="delete-task" data-id="${task.id}">Delete Task</button>
         <button class="edit-task" data-id="${task.id}">Edit Task</button> -->
-    </div>
+    </div><br>
+
     <div id="list">
+        <div id="form-container">
+            <form id="new-task-form" style="display: none;">
+                <label for="name">Name:</label>
+                <input type="text" id="task-name" name="name"><br><br>
+    
+                <label for="due_date">Date: </label>
+                <input type="text" id="task-due-date" name="due_date"><br><br>
+                
+                <label for="completed">Completed: </label>
+                <input type="radio" id="task-completed" name="completed" value="true"><br>
+    
+                <label for="task[task_notes]">Notes: </label>
+                <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>
+    
+                <input type="submit" value="Create Task" id="submit-button">
+            </form>
+        </div><br>
         <ul id="task-list">
 
         </ul>
     </div>
 
-    <div id="form-container">
-        <form id="new-task-form" style="display: none;">
-            <label for="name">Name:</label>
-            <input type="text" id="task-name" name="name"><br><br>
-
-            <label for="due_date">Date: </label>
-            <input type="text" id="task-due-date" name="due_date"><br><br>
-            
-            <label>Completed: </label>
-            <label for="completed">Yes</label><input type="checkbox" id="task-completed" name="completed" value="true">
-            <label for="not completed">No</label><input type="checkbox" id="task-completed" name="not completed" value="false"><br>
-
-            <label for="task[task_notes]">Notes: </label>
-            <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>
-
-            <input type="submit" value="Create Task" id="submit-button">
-        </form>
-    </div>
+    
 
     <script src="javascripts/index.js"></script>
 </body>

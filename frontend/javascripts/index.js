@@ -37,11 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // 3. Functions
 
 const displayNewForm = () => {
+    debugger
     // 1. HTML to show the form
     // 2. insert onto page
     // 3. submit button / event listener
     // 4. need to insert toggle function
-
+   /*  const header = document.createElement("h1")
+    header.innerText = 'New Task'
+    formContainer().appendChild(header)
+ */
     const form = newTaskForm().style.display= 'block';
     form.innerHTML += `
         <label for="name">Name:</label>
@@ -50,9 +54,8 @@ const displayNewForm = () => {
         <label for="due_date">Date: </label>
         <input type="text" id="task-due-date" name="due_date"><br>
 
-        <label>Completed: </label>
-        <label for="completed">Yes</label><input type="checkbox" id="task-completed" name="completed" value="true">
-        <label for="not completed">No</label><input type="checkbox" id="task-completed" name="not completed" value="false"><br>
+        <label for="completed">Completed: </label>
+        <input type="radio" id="task-completed" name="completed" checked="true"><br>
 
         <label for="task[task_notes]">Notes: </label>
         <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>
@@ -100,14 +103,20 @@ const handleSubmit = (e) => {
 const renderTask = (task) => {
     //debugger
     const li = document.createElement("li")
-    li.innerHTML += `
-        <div data-id="${task.id}">
-            <h2>${task.name}</h2>
-            <li>When: ${task.due_date}</li>
-            <li>Completed? ${task.completed}</li>
-            <li>Notes: ${task.task_notes}</li>
+    li.innerHTML = `
+        <h2 id="task-name"><a href="#" id="task-${task.id}">${task.name}</a></h2>
+        <ul id"individual-task-list" >
+            <li id="task-due-date">${task.due_date}</li>
+            <li id="task-completed">${task.completed}</li>
+        </ul>
+        <div id="task-${task.id}-notes" class="hidden">
+            <legend><strong>Notes</strong></legend>
         </div>
-    `
+
+        <button class="delete-task" data-id="${task.id}">Delete Task</button>
+        <button class="edit-task" data-id="${task.id}">Edit Task</button>
+        <button class="add-note" onclick="displayNoteField()" data-id="${task.id}">Add Note</button>
+        `
     ulTaskList().appendChild(li) 
 }
  
@@ -131,8 +140,11 @@ const handleError = (error) => {
 }
 
 const renderTasks = (tasks) => {
-    
-    // need to ensure that you cannot click render tasks twice and see it twice
+    //debugger
+    const header = document.createElement("h1")
+    header.innerText = 'Tasks'
+    ulTaskList().appendChild(header)
+
     tasks.data.forEach(({attributes}) => {
         //debugger
         const li = document.createElement("li")
