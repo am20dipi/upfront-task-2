@@ -138,7 +138,7 @@ const renderTasks = (tasks) => {
         const li = document.createElement("li")
         li.innerHTML = `
             <h2 id="task-name"><a href="#" id="task-${attributes.id}">${attributes.name}</a></h2>
-            <ul id"individual-task-list" class="hidden">
+            <ul id"individual-task-list" >
                 <li id="task-due-date">${attributes.due_date}</li>
                 <li id="task-completed">${attributes.completed}</li>
             </ul>
@@ -166,7 +166,7 @@ const renderTasks = (tasks) => {
                 })
                 task.classList.toggle("hidden")
         })
-        document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleUpdate)
+        document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
         //document.querySelector(`button.add-note[data-id='${attributes.id}']`).addEventListener("click", addNote)
     })
     // iterating through the array tasks
@@ -174,7 +174,6 @@ const renderTasks = (tasks) => {
     // setting the inner html of each li to the specific task's attrs.
     // appending each task to the page under the specified parent 
     // selecting the delete button of that instance and adding event listener
-    li.classList.toggle("hidden")
 }
 
 
@@ -200,7 +199,7 @@ const handleDelete = (e) => {
         //.catch(handleError)
     }
 
-const handleUpdate = (e) => {
+const handleEdit = (e) => {
     // 1. listen/wait for click event
     // 2. render form with preexisting field input
     // 3. replace current li with new li, map values
@@ -229,9 +228,38 @@ const handleUpdate = (e) => {
             <button class="edit-task" data-id="${taskId}">Update</button>
             <button class="delete-task" data-id="${taskId}">Delete</button>
             `
+            document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", handleDelete)
+            document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", handleUpdate)
     } else {
+        //debugger
+        handleUpdate(e)
+    }
+}
+
+const handleUpdate = (e) => {
+    const updateData = {
+        name: taskName().value,
+        due_date: taskDueDate().value,
+        completed: taskCompleted().value,
+        task_notes: taskNotes().value
 
     }
+    fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": 'application/json'
+
+        },
+        body: JSON.stringify(updateData)
+            
+        })
+        .then(resp => resp.json())
+            //debugger
+        .then(json => {
+            alert("Successfully Updated")
+            ulIndividualTask().appendChild(updateData)
+        })
+        .catch(handleError)
 }
 
 
