@@ -4,7 +4,6 @@
 //Buttons
 const buttonsDiv = () => document.getElementById("buttons")
 const showTasksButton = () => document.querySelector(".show-tasks")
-const addTaskButton = () => document.querySelector(".add-task")
 const deleteTaskButton = () => document.querySelector(".delete-task")
 const editTaskButton = () => document.querySelector(".edit-task")
 const submitButton = () => document.getElementById("submit-button")
@@ -13,7 +12,6 @@ const submitButton = () => document.getElementById("submit-button")
 //Lists
 const listDiv = () => document.getElementById("list")
 const ulTaskList = () => document.getElementById("task-list")   
-const ulIndividualTask = () => document.querySelector("#individual-task-list")
 
 //Forms
 const newTaskForm = () => document.querySelector("#new-task-form")
@@ -31,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showTasksButton().addEventListener("click", handleClick)
     // invoking showTasksButton and creating a click event listener
     // handleClick is a callback function --> we do not invoke it here. 
+    submitButton().addEventListener("click", handleSubmit)
 })
 
 // 3. Functions
@@ -63,14 +62,14 @@ const handleSubmit = (e) => {
      })
      .then(resp => resp.json())
      .then(json => {
-        renderTask(json)
+        appendTask(json)
         document.getElementById("new-task-form").reset();
-        document.getElementById("new-task-form").remove();
     })
+    debugger
 }
 
 
-const renderTask = (task) => {
+const appendTask = (task) => {
     debugger
     const li = document.createElement("li")
     li.innerHTML = `
@@ -81,12 +80,12 @@ const renderTask = (task) => {
         
         `
     ulTaskList().appendChild(li) 
+    
 }
  
 
 
 const handleClick = () => {
-
     // anonymous function
     if (ulTaskList().children.length < 1) {
         fetch('http://localhost:3000/tasks')
@@ -109,7 +108,6 @@ const handleError = (error) => {
 }
 
 const renderTasks = (tasks) => {
-    debugger
     const header = document.createElement("h1")
     header.innerText = 'Tasks'
     ulTaskList().appendChild(header)
@@ -222,9 +220,8 @@ const handleUpdate = (e) => {
             //debugger
         .then(json => {
             alert("Successfully Updated")
-            e.target.parentNode.remove()
+            replaceElement(json, e.target.parentElement)
         })
-        .then(json => replaceElement(json, e.target.parentElement))
         debugger
         
 }
@@ -233,6 +230,8 @@ const handleUpdate = (e) => {
 const replaceElement = (task, li) => {
     li.innerHTML = `
     <h2 id="task-name"><a href="#" id="task-${task.id}">${task.name}</a></h2>
+    <button class="edit-task" data-id="${task.id}">Update</button>
+    <button class="delete-task" data-id="${task.id}">Delete</button>
     `
 }
 
