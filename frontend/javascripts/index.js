@@ -7,7 +7,6 @@ const showTasksButton = () => document.querySelector(".show-tasks")
 const deleteTaskButton = () => document.querySelector(".delete-task")
 const editTaskButton = () => document.querySelector(".edit-task")
 const submitButton = () => document.getElementById("submit-button")
-//const addNoteButton = () => document.querySelector(".add-note")
 
 //Lists
 const listDiv = () => document.getElementById("list")
@@ -17,9 +16,7 @@ const ulTaskList = () => document.getElementById("task-list")
 const newTaskForm = () => document.querySelector("#new-task-form")
 const formContainer = () => document.getElementById("form-container")
 const taskName = () => document.getElementById("task-name")
-//const taskDueDate = () => document.getElementById("task-due-date")
-//const taskCompleted = () => document.getElementById("task-completed")
-//const taskNotes = () => document.getElementById("task-note-id")
+
 
 
 // 2. Events
@@ -41,11 +38,7 @@ const handleSubmit = (e) => {
     // 4. clear form and remove form
     e.preventDefault()
     const data = {
-        name: taskName().value/* ,
-        due_date: taskDueDate().value,
-        completed: taskCompleted().value,
-        task_notes: taskNotes().value */
-
+        name: taskName().value
     }
     // setting object "data" to the values of each input field
     // creating an object with keyvalue pairs
@@ -80,7 +73,6 @@ const appendTask = (task) => {
         
         `
     ulTaskList().appendChild(li) 
-    
 }
  
 
@@ -100,7 +92,6 @@ const handleClick = () => {
     } else {
         ulTaskList().innerHTML = ""
     }
-    
 }
 
 const handleError = (error) => {
@@ -109,37 +100,22 @@ const handleError = (error) => {
 
 const renderTasks = (tasks) => {
     const header = document.createElement("h1")
-    header.innerText = 'Tasks'
+    header.innerText = 'All Tasks'
     ulTaskList().appendChild(header)
 
     tasks.data.forEach(({attributes}) => {
         //debugger
         const li = document.createElement("li")
         li.innerHTML = `
-            <h2 id="task-name"><a href="#" id="task-${attributes.id}" class="col">${attributes.name}</a></h2>
-    
+            <h3 id="task-name">${attributes.name}</a></h3>
 
-            <button class="delete-task" data-id="${attributes.id}">Delete Task</button>
-            <button class="edit-task" data-id="${attributes.id}">Edit Task</button>
+            <button class="delete-task" data-id="${attributes.id}" class="hidden">Delete Task</button>
+            <button class="edit-task" data-id="${attributes.id}" class="hidden">Edit Task</button>
 
         `
-       // debugger
         ulTaskList().appendChild(li)
-
         document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
-        /* document.querySelector(`#task-${attributes.id}`).addEventListener("click", () => {
-                const task = document.querySelector(`#task-${attributes.id}-notes`)
-                task.innerText=""
-                attributes.task_notes.forEach(task_note => {
-                    const li = document.createElement("li")
-                    li.innerText = task_note.content
-
-                    task.appendChild(li)
-                })
-                task.classList.toggle("hidden")
-        }) */
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
-        //document.querySelector(`button.add-note[data-id='${attributes.id}']`).addEventListener("click", addNote)
     })
     // iterating through the array tasks
     // creating an element li for each task
@@ -168,7 +144,6 @@ const handleDelete = (e) => {
             alert("Successfully Deleted")
             e.target.parentNode.remove()
         })
-        //.catch(handleError)
     }
 
 const handleEdit = (e) => {
@@ -180,9 +155,6 @@ const handleEdit = (e) => {
     if (e.target.innerText === 'Edit Task') {
         const taskId = e.target.dataset.id
         const name = e.target.parentElement.querySelector("#task-name").innerText 
-        /* const dueDate = e.target.parentElement.querySelector("#task-due-date").innerText
-        const completed = e.target.parentElement.querySelector("#task-completed").innerText
-        const notes = e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText */
          e.target.parentElement.innerHTML = `
             <label for="name">Name:</label>
             <input type="text" id="task-name" name="name" value='${name}'><br>
@@ -201,11 +173,7 @@ const handleEdit = (e) => {
 
 const handleUpdate = (e) => {
     const updateData = {
-        name: e.target.parentElement.querySelector("#task-name").value/* , 
-        due_date: e.target.parentElement.querySelector("#task-due-date").innerText,
-        completed: e.target.parentElement.querySelector("#task-completed").innerText,
-        task_notes: e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText */
-
+        name: e.target.parentElement.querySelector("#task-name").value
     }
     fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
         method: 'PATCH',
@@ -217,7 +185,6 @@ const handleUpdate = (e) => {
             
         })
         .then(resp => resp.json())
-            //debugger
         .then(json => {
             alert("Successfully Updated")
             replaceElement(json, e.target.parentElement)
@@ -234,35 +201,3 @@ const replaceElement = (task, li) => {
     <button class="delete-task" data-id="${task.id}">Delete</button>
     `
 }
-
-/* const displayNoteField = () => {
-    debugger
-    
-    const note_field = document.getElementById("task-notes")
-    ulIndividualTask().appendChild(note_field)
-    addNoteButton().addEventListener("click", handleNote)
-
-}
-
-const handleNote = (e) => {
-    debugger
-    const noteData = {
-        task_notes: taskNotes().value
-    }
-    fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json'
-
-        },
-        body: JSON.stringify(noteData)
-            
-        })
-        .then(resp => {
-            //debugger
-            alert("Successfully Added")
-            const li = noteData
-            taskNotes().appendChild(li)
-        })
-}
- */
