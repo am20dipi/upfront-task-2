@@ -17,11 +17,11 @@ const ulIndividualTask = () => document.querySelector("#individual-task-list")
 
 //Forms
 const newTaskForm = () => document.querySelector("#new-task-form")
-const formContainer = () => document.querySelector("#form-container")
+const formContainer = () => document.getElementById("form-container")
 const taskName = () => document.getElementById("task-name")
 const taskDueDate = () => document.getElementById("task-due-date")
 const taskCompleted = () => document.getElementById("task-completed")
-const taskNotes = () => document.getElementById("task-notes")
+const taskNotes = () => document.getElementById("task-note-id")
 
 
 // 2. Events
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 3. Functions
 
 const displayNewForm = () => {
-    debugger
+    //debugger
     // 1. HTML to show the form
     // 2. insert onto page
     // 3. submit button / event listener
@@ -46,8 +46,9 @@ const displayNewForm = () => {
     header.innerText = 'New Task'
     formContainer().appendChild(header)
  */
-    const form = newTaskForm().style.display= 'block';
-    form.innerHTML += `
+    if (formContainer().children.length < 1) {
+        const form = newTaskForm()
+        form.innerHTML += `
         <label for="name">Name:</label>
         <input type="text" id="task-name" name="tname"><br>
 
@@ -57,12 +58,16 @@ const displayNewForm = () => {
         <label for="completed">Completed: </label>
         <input type="radio" id="task-completed" name="completed" checked="true"><br>
 
-        <label for="task[task_notes]">Notes: </label>
-        <textarea id="task-notes" name="task[task_notes]"></textarea><br><br>
+        <label for="task-notes">Notes: </label>
+        <textarea id="task_note_id" name="task-notes"></textarea><br><br>
         
         <input type="submit" value="Create Task" id="submit-button">
         `
     submitButton().addEventListener("click", handleSubmit)
+    } else {
+        formContainer().innerHTML = ""
+    }
+    
 }
 
 const handleSubmit = (e) => {
@@ -123,8 +128,10 @@ const renderTask = (task) => {
 
 
 const handleClick = () => {
+
     // anonymous function
-    fetch('http://localhost:3000/tasks')
+    if (ulTaskList().children.length < 1) {
+        fetch('http://localhost:3000/tasks')
     // fetch takes in an endpoint as an argument
     // fetch returns Promise objects
     .then(resp => resp.json())
@@ -133,6 +140,10 @@ const handleClick = () => {
     // taking the parsed data and passing it through a function renderTasks
     .catch(handleError)
     // using .catch to handle errors, passing in a function I created below
+    } else {
+        ulTaskList().innerHTML = ""
+    }
+    
 }
 
 const handleError = (error) => {
@@ -230,12 +241,11 @@ const handleEdit = (e) => {
             <label for="due_date">Date: </label>
             <input type="text" id="task-due-date" name="due_date" value='${dueDate}'><br>
 
-            <label>Completed: </label>
-            <label for="completed">Yes</label><input type="checkbox" id="task-completed" name="completed" value='${completed}'>
-            <label for="not completed">No</label><input type="checkbox" id="task-completed" name="not completed"><br>
-
-            <label for="task[task_notes]">Notes: </label>
-            <textarea id="task-notes" name="task[task_notes]" value='${notes}'></textarea><br><br>
+            <label for="completed">Completed: </label>
+            <input type="radio" id="task-completed" name="completed" value="true"><br>
+    
+            <label for="task-notes">Notes: </label>
+            <textarea id="task-id-notes" name="task-notes"></textarea><br><br>
             
             <button class="edit-task" data-id="${taskId}">Update</button>
             <button class="delete-task" data-id="${taskId}">Delete</button>
@@ -249,11 +259,12 @@ const handleEdit = (e) => {
 }
 
 const handleUpdate = (e) => {
+    debugger
     const updateData = {
-        name: taskName().value,
-        due_date: taskDueDate().value,
-        completed: taskCompleted().value,
-        task_notes: taskNotes().value
+        name: e.target.parentElement.querySelector("#task-name").innerText, 
+        due_date: e.target.parentElement.querySelector("#task-due-date").innerText,
+        completed: e.target.parentElement.querySelector("#task-completed").innerText,
+        task_notes: e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText
 
     }
     fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {

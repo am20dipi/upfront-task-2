@@ -88,3 +88,6 @@ PROJECT NOTES
     - preventing default behavior
     - if the page refreshes, then you need a preventDefault
     - typically with forms, or buttons that send you somewhere else(think href)
+
+    style="display: none;
+    .style.display= 'block'

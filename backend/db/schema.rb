@@ -10,26 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_184857) do
+ActiveRecord::Schema.define(version: 2021_06_13_163251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "task_notes", force: :cascade do |t|
-    t.text "content"
-    t.bigint "task_id", null: false
+  create_table "completed_tasks", force: :cascade do |t|
+    t.boolean "completed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_task_notes_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
-    t.boolean "completed"
-    t.string "due_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "completed_tasks_id", null: false
+    t.index ["completed_tasks_id"], name: "index_tasks_on_completed_tasks_id"
   end
 
-  add_foreign_key "task_notes", "tasks", on_delete: :cascade
+  add_foreign_key "tasks", "completed_tasks", column: "completed_tasks_id"
 end

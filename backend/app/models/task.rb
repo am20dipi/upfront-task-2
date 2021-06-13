@@ -1,3 +1,3 @@
 class Task < ApplicationRecord
-    has_many :task_notes
+    belongs_to :completed_task
 end
