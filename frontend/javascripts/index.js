@@ -116,7 +116,7 @@ const renderTasks = (tasks) => {
         //debugger
         const li = document.createElement("li")
         li.innerHTML = `
-            <h2 id="task-name"><a href="#" id="task-${attributes.id}">${attributes.name}</a></h2>
+            <h2 id="task-name"><a href="#" id="task-${attributes.id}" class="col">${attributes.name}</a></h2>
     
 
             <button class="delete-task" data-id="${attributes.id}">Delete Task</button>

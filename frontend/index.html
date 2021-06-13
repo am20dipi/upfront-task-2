@@ -8,19 +8,27 @@
 </head>
 <body>
     <div>
-        <h1>UPFRONT</h1>
+        <h1 class="content">UPFRONT</h1>
     </div>
     <div id="buttons" class="navbar">
-        <button class="show-tasks">Show Tasks</button>
-
-    </div><br>
+        <button class="show-tasks">All</button>
+        <button>Completed</button>
+        <button>Active</button>
+        <button>Priority</button>
+    </div><br><br>
 
     <div id="form-container">
-        <form id="new-task-form">
-            <input type="text" id="task-name" name="name" placeholder="New Task...">
-            <input type="submit" value="Create Task" id="submit-button">
+        <form id="new-task-form" class="content">
+            <label class="custom-field">
+                <input type="text" id="task-name" name="name" placeholder="New Task..." >
+            </label>
+            <label class="custom-submit">
+                <input type="submit" value="Create Task" id="submit-button">
+            </label>
+            
         </form>
-        </div><br>
+    </div><br>
+    <div class="container">
         <ul id="task-list">
 
         </ul>
