@@ -6,13 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Task.create!(name: "Go to carwash")
-Task.create!(name: "Bring Cosmo to vet")
-Task.create!(name: "Go to bank")
-Task.create!(name: "Buy groceries")
-Task.create!(name: "Buy Mom flowers")
-Task.create!(name: "Go to office hours")
-Task.create!(name: "Present for father's day")
+Task.create!(name: "Go to carwash", category_id: 1)
+Task.create!(name: "Bring Cosmo to vet", category_id: 2)
+Task.create!(name: "Go to bank", category_id: 2)
+Task.create!(name: "Buy groceries", category_id: 1)
+Task.create!(name: "Buy Mom flowers", category_id: 1)
+Task.create!(name: "Go to office hours", category_id: 1)
+Task.create!(name: "Present for father's day", category_id: 1)
+
+Category.create!(name: "Completed")
+Category.create!(name: "Priority")
 
 
 

@@ -7,6 +7,9 @@ const showTasksButton = () => document.querySelector(".show-tasks")
 const deleteTaskButton = () => document.querySelector(".delete-task")
 const editTaskButton = () => document.querySelector(".edit-task")
 const submitButton = () => document.getElementById("submit-button")
+const completedTasks = () => document.querySelector(".completed-tasks")
+const activeTasks = () => document.querySelector(".active-tasks")
+const priorityTasks = () => document.querySelector(".priority-tasks")
 
 //Lists
 const listDiv = () => document.getElementById("list")
@@ -27,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // invoking showTasksButton and creating a click event listener
     // handleClick is a callback function --> we do not invoke it here. 
     submitButton().addEventListener("click", handleSubmit)
+    completedTasks().addEventListener("click", displayCompletedTasks)
 })
 
 // 3. Functions
@@ -196,8 +200,29 @@ const handleUpdate = (e) => {
 
 const replaceElement = (task, li) => {
     li.innerHTML = `
-    <h2 id="task-name"><a href="#" id="task-${task.id}">${task.name}</a></h2>
+    <h2 id="task-name">${task.name}</h2>
     <button class="edit-task" data-id="${task.id}">Update</button>
     <button class="delete-task" data-id="${task.id}">Delete</button>
     `
+}
+
+const displayCompletedTasks = (tasks) => {
+    debugger
+
+    tasks.data.forEach(({attributes}) => {
+        if (task.category_id === 1) {
+            const li = document.createElement("li")
+            li.innerHTML = `
+                <h3 id="task-name">${attributes.name}</a></h3>
+    
+                <button class="delete-task" data-id="${attributes.id}" class="hidden">Delete Task</button>
+                <button class="edit-task" data-id="${attributes.id}" class="hidden">Edit Task</button>
+    
+            `
+            ulTaskList().appendChild(li)
+            document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
+            document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
+        }
+    })
+
 }
