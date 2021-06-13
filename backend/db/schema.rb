@@ -10,24 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_13_163251) do
+ActiveRecord::Schema.define(version: 2021_06_10_184751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "completed_tasks", force: :cascade do |t|
-    t.boolean "completed"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "completed_tasks_id", null: false
-    t.index ["completed_tasks_id"], name: "index_tasks_on_completed_tasks_id"
   end
 
-  add_foreign_key "tasks", "completed_tasks", column: "completed_tasks_id"
 end

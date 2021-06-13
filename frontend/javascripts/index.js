@@ -8,7 +8,7 @@ const addTaskButton = () => document.querySelector(".add-task")
 const deleteTaskButton = () => document.querySelector(".delete-task")
 const editTaskButton = () => document.querySelector(".edit-task")
 const submitButton = () => document.getElementById("submit-button")
-const addNoteButton = () => document.querySelector(".add-note")
+//const addNoteButton = () => document.querySelector(".add-note")
 
 //Lists
 const listDiv = () => document.getElementById("list")
@@ -19,9 +19,9 @@ const ulIndividualTask = () => document.querySelector("#individual-task-list")
 const newTaskForm = () => document.querySelector("#new-task-form")
 const formContainer = () => document.getElementById("form-container")
 const taskName = () => document.getElementById("task-name")
-const taskDueDate = () => document.getElementById("task-due-date")
-const taskCompleted = () => document.getElementById("task-completed")
-const taskNotes = () => document.getElementById("task-note-id")
+//const taskDueDate = () => document.getElementById("task-due-date")
+//const taskCompleted = () => document.getElementById("task-completed")
+//const taskNotes = () => document.getElementById("task-note-id")
 
 
 // 2. Events
@@ -31,44 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showTasksButton().addEventListener("click", handleClick)
     // invoking showTasksButton and creating a click event listener
     // handleClick is a callback function --> we do not invoke it here. 
-    addTaskButton().addEventListener("click", displayNewForm)
 })
 
 // 3. Functions
-
-const displayNewForm = () => {
-    //debugger
-    // 1. HTML to show the form
-    // 2. insert onto page
-    // 3. submit button / event listener
-    // 4. need to insert toggle function
-   /*  const header = document.createElement("h1")
-    header.innerText = 'New Task'
-    formContainer().appendChild(header)
- */
-    if (formContainer().children.length < 1) {
-        const form = newTaskForm()
-        form.innerHTML += `
-        <label for="name">Name:</label>
-        <input type="text" id="task-name" name="tname"><br>
-
-        <label for="due_date">Date: </label>
-        <input type="text" id="task-due-date" name="due_date"><br>
-
-        <label for="completed">Completed: </label>
-        <input type="radio" id="task-completed" name="completed" checked="true"><br>
-
-        <label for="task-notes">Notes: </label>
-        <textarea id="task_note_id" name="task-notes"></textarea><br><br>
-        
-        <input type="submit" value="Create Task" id="submit-button">
-        `
-    submitButton().addEventListener("click", handleSubmit)
-    } else {
-        formContainer().innerHTML = ""
-    }
-    
-}
 
 const handleSubmit = (e) => {
     // 1. prevent default
@@ -77,10 +42,10 @@ const handleSubmit = (e) => {
     // 4. clear form and remove form
     e.preventDefault()
     const data = {
-        name: taskName().value,
+        name: taskName().value/* ,
         due_date: taskDueDate().value,
         completed: taskCompleted().value,
-        task_notes: taskNotes().value
+        task_notes: taskNotes().value */
 
     }
     // setting object "data" to the values of each input field
@@ -106,21 +71,14 @@ const handleSubmit = (e) => {
 
 
 const renderTask = (task) => {
-    //debugger
+    debugger
     const li = document.createElement("li")
     li.innerHTML = `
         <h2 id="task-name"><a href="#" id="task-${task.id}">${task.name}</a></h2>
-        <ul id"individual-task-list" >
-            <li id="task-due-date">${task.due_date}</li>
-            <li id="task-completed">${task.completed}</li>
-        </ul>
-        <div id="task-${task.id}-notes" class="hidden">
-            <legend><strong>Notes</strong></legend>
-        </div>
-
+        
         <button class="delete-task" data-id="${task.id}">Delete Task</button>
         <button class="edit-task" data-id="${task.id}">Edit Task</button>
-        <button class="add-note" onclick="displayNoteField()" data-id="${task.id}">Add Note</button>
+        
         `
     ulTaskList().appendChild(li) 
 }
@@ -151,7 +109,7 @@ const handleError = (error) => {
 }
 
 const renderTasks = (tasks) => {
-    //debugger
+    debugger
     const header = document.createElement("h1")
     header.innerText = 'Tasks'
     ulTaskList().appendChild(header)
@@ -161,24 +119,17 @@ const renderTasks = (tasks) => {
         const li = document.createElement("li")
         li.innerHTML = `
             <h2 id="task-name"><a href="#" id="task-${attributes.id}">${attributes.name}</a></h2>
-            <ul id"individual-task-list" >
-                <li id="task-due-date">${attributes.due_date}</li>
-                <li id="task-completed">${attributes.completed}</li>
-            </ul>
-            <div id="task-${attributes.id}-notes" class="hidden">
-                <legend><strong>Notes</strong></legend>
-            </div>
+    
 
             <button class="delete-task" data-id="${attributes.id}">Delete Task</button>
             <button class="edit-task" data-id="${attributes.id}">Edit Task</button>
-            <button class="add-note" onclick="displayNoteField()" data-id="${attributes.id}">Add Note</button>
 
         `
        // debugger
         ulTaskList().appendChild(li)
 
         document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
-        document.querySelector(`#task-${attributes.id}`).addEventListener("click", () => {
+        /* document.querySelector(`#task-${attributes.id}`).addEventListener("click", () => {
                 const task = document.querySelector(`#task-${attributes.id}-notes`)
                 task.innerText=""
                 attributes.task_notes.forEach(task_note => {
@@ -188,7 +139,7 @@ const renderTasks = (tasks) => {
                     task.appendChild(li)
                 })
                 task.classList.toggle("hidden")
-        })
+        }) */
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
         //document.querySelector(`button.add-note[data-id='${attributes.id}']`).addEventListener("click", addNote)
     })
@@ -231,21 +182,13 @@ const handleEdit = (e) => {
     if (e.target.innerText === 'Edit Task') {
         const taskId = e.target.dataset.id
         const name = e.target.parentElement.querySelector("#task-name").innerText 
-        const dueDate = e.target.parentElement.querySelector("#task-due-date").innerText
+        /* const dueDate = e.target.parentElement.querySelector("#task-due-date").innerText
         const completed = e.target.parentElement.querySelector("#task-completed").innerText
-        const notes = e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText
-        e.target.parentElement.innerHTML = `
+        const notes = e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText */
+         e.target.parentElement.innerHTML = `
             <label for="name">Name:</label>
             <input type="text" id="task-name" name="name" value='${name}'><br>
 
-            <label for="due_date">Date: </label>
-            <input type="text" id="task-due-date" name="due_date" value='${dueDate}'><br>
-
-            <label for="completed">Completed: </label>
-            <input type="radio" id="task-completed" name="completed" value="true"><br>
-    
-            <label for="task-notes">Notes: </label>
-            <textarea id="task-id-notes" name="task-notes"></textarea><br><br>
             
             <button class="edit-task" data-id="${taskId}">Update</button>
             <button class="delete-task" data-id="${taskId}">Delete</button>
@@ -253,18 +196,17 @@ const handleEdit = (e) => {
             document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", handleDelete)
             document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", handleUpdate)
     } else {
-        //debugger
+        debugger
         handleUpdate(e)
     }
 }
 
 const handleUpdate = (e) => {
-    debugger
     const updateData = {
-        name: e.target.parentElement.querySelector("#task-name").innerText, 
+        name: e.target.parentElement.querySelector("#task-name").value/* , 
         due_date: e.target.parentElement.querySelector("#task-due-date").innerText,
         completed: e.target.parentElement.querySelector("#task-completed").innerText,
-        task_notes: e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText
+        task_notes: e.target.parentElement.querySelector(`#task-${taskId}-notes`).innerText */
 
     }
     fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
@@ -280,13 +222,21 @@ const handleUpdate = (e) => {
             //debugger
         .then(json => {
             alert("Successfully Updated")
-            ulIndividualTask().appendChild(updateData)
+            e.target.parentNode.remove()
         })
-        .catch(handleError)
+        .then(json => replaceElement(json, e.target.parentElement))
+        debugger
+        
 }
 
 
-const displayNoteField = () => {
+const replaceElement = (task, li) => {
+    li.innerHTML = `
+    <h2 id="task-name"><a href="#" id="task-${task.id}">${task.name}</a></h2>
+    `
+}
+
+/* const displayNoteField = () => {
     debugger
     
     const note_field = document.getElementById("task-notes")
@@ -316,3 +266,4 @@ const handleNote = (e) => {
             taskNotes().appendChild(li)
         })
 }
+ */

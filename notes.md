@@ -91,3 +91,49 @@ PROJECT NOTES
 
     style="display: none;
     .style.display= 'block'
+
+displayNewForm
+    <label for="due_date">Date: </label>
+        <input type="text" id="task-due-date" name="due_date"><br>
+
+        <label for="completed">Completed: </label>
+        <input type="radio" id="task-completed" name="completed" checked="true"><br>
+
+        <label for="task-notes">Notes: </label>
+        <textarea id="task_note_id" name="task-notes"></textarea><br><br>
+
+
+renderTask
+        <ul id"individual-task-list" >
+            <li id="task-due-date">${task.due_date}</li>
+            <li id="task-completed">${task.completed}</li>
+        </ul>
+        <div id="task-${task.id}-notes" class="hidden">
+            <legend><strong>Notes</strong></legend>
+        </div>
+        <button class="add-note" onclick="displayNoteField()" data-id="${task.id}">Add Note</button>
+
+
+
+const displayNewForm = () => {
+    //debugger
+    // 1. HTML to show the form
+    // 2. insert onto page
+    // 3. submit button / event listener
+    // 4. need to insert toggle function
+   /*  const header = document.createElement("h1")
+    header.innerText = 'New Task'
+    formContainer().appendChild(header)
+ */
+    const form = newTaskForm()
+    form.innerHTML += `
+        <label for="name">Name:</label>
+        <input type="text" id="task-name" name="name"><br>
+
+        
+        
+        <input type="submit" value="Create Task" id="submit-button">
+        `
+    submitButton().addEventListener("click", handleSubmit)
+    
+}
