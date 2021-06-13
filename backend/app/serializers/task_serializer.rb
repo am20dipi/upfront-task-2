@@ -1,5 +1,5 @@
 class TaskSerializer
   include JSONAPI::Serializer
-  attributes :id, :name, :due_date, :completed, :task_notes
+  attributes :id, :name, :completed_task
   #has_many :task_notes, except: [:created_at, :updated_at]
 end
