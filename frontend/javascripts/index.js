@@ -1,24 +1,4 @@
-// 1. Declaring "getter" Functions
-    // calling on the document object to retrieve the element classified under the specified argument
 
-//Buttons
-const buttonsDiv = () => document.getElementById("buttons")
-const showTasksButton = () => document.querySelector(".show-tasks")
-const deleteTaskButton = () => document.querySelector(".delete-task")
-const editTaskButton = () => document.querySelector(".edit-task")
-const submitButton = () => document.getElementById("submit-button")
-const completedTasks = () => document.querySelector(".completed-tasks")
-const activeTasks = () => document.querySelector(".active-tasks")
-const priorityTasks = () => document.querySelector(".priority-tasks")
-
-//Lists
-const taskTable = () => document.getElementById("task-table")   
-
-//Forms
-const newTaskForm = () => document.querySelector("#new-task-form")
-const formContainer = () => document.getElementById("form-container")
-const taskName = () => document.getElementById("task-name")
-const categoryId = () => document.getElementById("category-id")
 
 
 
@@ -141,6 +121,7 @@ const renderTasks = (tasks) => {
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
 
     })
+    debugger
     // iterating through the array tasks
     // creating an element li for each task
     // setting the inner html of each li to the specific task's attrs.
@@ -176,7 +157,7 @@ const handleEdit = (e) => {
     // 3. replace current li with new li, map values
     // 4. clear & remove form
     debugger
-    if (e.target.innerText === 'o') {
+    if (e.target.innerText == 'Edit') {
         const taskId = e.target.dataset.id
         const name = e.target.parentElement.querySelector("#task-name").innerText 
          e.target.parentElement.innerHTML = `

@@ -88,18 +88,6 @@ PROJECT NOTES
     - preventing default behavior
     - if the page refreshes, then you need a preventDefault
     - typically with forms, or buttons that send you somewhere else(think href)
-
-    style="display: none;
-    .style.display= 'block'
-
-
-
-const li = document.createElement("li")
-        li.innerHTML = `
-            <h3 id="task-name">${attributes.name}</a></h3>  
-
-            <button class="delete-task" data-id="${attributes.id}"id="left" >Delete Task</button>
-            <button class="edit-task" data-id="${attributes.id}" id="left">Edit Task</button>
-
-        `
-        ulTaskList().appendChild(li)
+    
+24. Prototypal Inheritance / Prototype
+25. Static
