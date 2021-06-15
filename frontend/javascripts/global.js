@@ -9,7 +9,6 @@ const editTaskButton = () => document.querySelector(".edit-task")
 const submitButton = () => document.getElementById("submit-button")
 const completedTasks = () => document.querySelector(".completed-tasks")
 const activeTasks = () => document.querySelector(".active-tasks")
-const priorityTasks = () => document.querySelector(".priority-tasks")
 
 //Lists
 const taskTable = () => document.getElementById("task-table")   

@@ -4,8 +4,6 @@ class TasksController < ApplicationController
   # GET /tasks
   def index
     tasks = Task.all
-    options = {}
-    #render json: tasks
     render json: TaskSerializer.new(tasks)
     # render json is implicitly invoking a method on its own 
     # render json turns data into JSON

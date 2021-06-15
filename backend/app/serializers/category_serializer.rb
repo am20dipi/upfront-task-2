@@ -1,5 +1,5 @@
 class CategorySerializer
   include JSONAPI::Serializer
-  attributes :name
+  attributes :name, :id
   has_many :tasks
 end
