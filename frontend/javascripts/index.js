@@ -42,12 +42,10 @@ const handleSubmit = (e) => {
         appendTask(json)
         document.getElementById("new-task-form").reset();
     })
-    debugger
 }
 
 
 const appendTask = (task) => {
-    debugger
     const table = document.getElementById("task-table")
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
@@ -55,20 +53,21 @@ const appendTask = (task) => {
         const td4 = document.createElement("td")   
         const row = document.createElement("tr");
 
-        td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
-        td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">O</button>`
-        td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">X</button>`
         td4.innerHTML = `<input type="checkbox" class="checker">`
-
+        td1.innerHTML = `<p id="task-name">${task.name}</p>`
+        td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
+        td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
+        
+        row.appendChild(td4)
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
-        row.appendChild(td4)
+        
 
         table.appendChild(row)
     
-    document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
-    document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
+    document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
+    document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", handleEdit)
 
 }
  
@@ -121,7 +120,6 @@ const renderTasks = (tasks) => {
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
 
     })
-    debugger
     // iterating through the array tasks
     // creating an element li for each task
     // setting the inner html of each li to the specific task's attrs.
@@ -147,7 +145,7 @@ const handleDelete = (e) => {
         .then(resp => {
             //debugger
             alert("Successfully Deleted")
-            e.target.parentNode.remove()
+            e.target.parentElement.parentElement.remove()
         })
     }
 
@@ -159,14 +157,12 @@ const handleEdit = (e) => {
     debugger
     if (e.target.innerText == 'Edit') {
         const taskId = e.target.dataset.id
-        const name = e.target.parentElement.querySelector("#task-name").innerText 
-         e.target.parentElement.innerHTML = `
-            <label for="name">Name:</label>
-            <input type="text" id="task-name" name="name" value='${name}'><br>
-
-            
-            <button class="edit-task" data-id="${taskId}">Update</button>
-            <button class="delete-task" data-id="${taskId}">Delete</button>
+        const name = e.target.parentElement.parentElement.querySelector("#task-name").innerText 
+         e.target.parentElement.parentElement.innerHTML = `
+            <td><input type="checkbox" class="checker"></td>
+            <td><input type="text" id="task-name" name="name" value='${name}'></td>
+            <td><button class="edit-task" data-id="${taskId}">Update</button></td>
+            <td><button class="delete-task" data-id="${taskId}">Delete</button></td>
             `
             document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", handleDelete)
             document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", handleUpdate)
@@ -178,7 +174,7 @@ const handleEdit = (e) => {
 
 const handleUpdate = (e) => {
     const updateData = {
-        name: e.target.parentElement.querySelector("#task-name").value
+        name: e.target.parentElement.parentElement.querySelector("#task-name").value
     }
     fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
         method: 'PATCH',
@@ -192,7 +188,7 @@ const handleUpdate = (e) => {
         .then(resp => resp.json())
         .then(json => {
             alert("Successfully Updated")
-            replaceElement(json, e.target.parentElement)
+            replaceElement(json, e.target.parentElement.parentElement)
         })
         debugger
         
@@ -201,11 +197,12 @@ const handleUpdate = (e) => {
 
 const replaceElement = (task, li) => {
     li.innerHTML = `
-    <h2 id="task-name">${task.name}</h2>
-    <button class="edit-task" data-id="${task.id}">Update</button>
-    <button class="delete-task" data-id="${task.id}">Delete</button>
+            <td><input type="checkbox" class="checker"></td>
+            <td><p id="task-name">${task.name}</p></td>
+            <td><button class="edit-task" data-id="${task.id}">Edit</button></td>
+            <td><button class="delete-task" data-id="${task.id}">Delete</button></td>
     `
-}
+} 
 
 const displayCompletedTasks = () => {
     debugger

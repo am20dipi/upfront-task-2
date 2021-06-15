@@ -11,4 +11,7 @@ class Task {
     static getAll() {
         return this.all
     }
+    // static methods are "utility" methods; helper methods
+    // defined on a class, but not apart of the instantiated object
+    // call static methods directly on the class, NOT on an instance of a class
 }
