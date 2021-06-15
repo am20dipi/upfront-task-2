@@ -1,7 +1,3 @@
-
-
-
-
 // 2. Events
     // DOMContentLoaded => when the DOM finishes loading, listen for the specified events 
 
@@ -14,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 // 3. Functions
-
 const handleSubmit = (e) => {
     // 1. prevent default
     // 2. fetch to endpoint, POST, body, headers
@@ -53,7 +48,7 @@ const appendTask = (task) => {
         const td4 = document.createElement("td")   
         const row = document.createElement("tr");
 
-        td4.innerHTML = `<input type="checkbox" class="checker">`
+        td4.innerHTML = `<input type="checkbox" name="checkbox" class="checker">`
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
@@ -68,7 +63,7 @@ const appendTask = (task) => {
     
     document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", handleEdit)
-
+    document.querySelector(`input[name="checkbox"]`).addEventListener("change", handleChecked)
 }
  
 
@@ -107,7 +102,7 @@ const renderTasks = (tasks) => {
         td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-        td4.innerHTML = `<input type="checkbox" class="checker">`
+        td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker">`
 
         row.appendChild(td4)
         row.appendChild(td1)
@@ -118,6 +113,7 @@ const renderTasks = (tasks) => {
         table.appendChild(row)
         document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
+        document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
 
     })
     // iterating through the array tasks
@@ -158,13 +154,14 @@ const handleEdit = (e) => {
         const taskId = e.target.dataset.id
         const name = e.target.parentElement.parentElement.querySelector("#task-name").innerText 
          e.target.parentElement.parentElement.innerHTML = `
-            <td><input type="checkbox" class="checker"></td>
+            <td><input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker"></td>
             <td><input type="text" id="task-name" name="name" value='${name}'></td>
             <td><button class="edit-task" data-id="${taskId}">Update</button></td>
             <td><button class="delete-task" data-id="${taskId}">Delete</button></td>
             `
             document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", handleDelete)
             document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", handleUpdate)
+            document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
     } else {
         handleUpdate(e)
     }
@@ -193,7 +190,7 @@ const handleUpdate = (e) => {
 
 const replaceElement = (task, li) => {
     li.innerHTML = `
-            <td><input type="checkbox" class="checker"></td>
+            <td><input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker"></td>
             <td><p id="task-name">${task.name}</p></td>
             <td><button class="edit-task" data-id="${task.id}">Edit</button></td>
             <td><button class="delete-task" data-id="${task.id}">Delete</button></td>
@@ -217,7 +214,6 @@ const handleCompletedTasks = () => {
 }
 
 const renderCompletedTasks = (tasks) => {
-    debugger
     tasks.data.forEach(({attributes}) => {
         if (attributes.category_id === 1 && taskTable().children.length < 4) {
                 //debugger
@@ -231,7 +227,7 @@ const renderCompletedTasks = (tasks) => {
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-                td4.innerHTML = `<input type="checkbox" class="checker" checked>`
+                td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" checked>`
         
                 row.appendChild(td4)
                 row.appendChild(td1)
@@ -242,11 +238,22 @@ const renderCompletedTasks = (tasks) => {
                 table.appendChild(row)
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
                 document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
+                document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
         } else {
             handleError()
         }
     })
-    
-    
+}
 
+const handleChecked = (e) => {
+    debugger
+        if (e.target.checked) {
+            debugger
+            alert("You have completed this task!")
+            e.target.parentElement.parentElement.category_id === 1
+        } else if (!e.target.checked) {
+            alert("You have unchecked this task.")
+        } else {
+            handleError()
+        }
 }
