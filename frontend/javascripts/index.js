@@ -71,15 +71,7 @@ const appendTask = (task) => {
 const handleClick = () => {
     // anonymous function
     if (taskTable().children.length < 4) {
-        fetch('http://localhost:3000/tasks')
-    // fetch takes in an endpoint as an argument
-    // fetch returns Promise objects
-    .then(resp => resp.json())
-    // taking the response object and parsing it to readable format
-    .then(json => renderTasks(json))
-    // taking the parsed data and passing it through a function renderTasks
-    .catch(handleError)
-    // using .catch to handle errors, passing in a function I created below
+        TaskApi.fetchTasks()
     } else {
         taskTable().innerHTML = " "
     }
