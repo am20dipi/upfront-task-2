@@ -198,14 +198,15 @@ const replaceElement = (task, li) => {
 } 
 
 const handleCompletedTasks = () => {
-    fetch(`http://localhost:3000/tasks`)
+    fetch("http://localhost:3000/tasks")
     // fetch takes in an endpoint as an argument
     // fetch returns Promise objects
     .then(resp => resp.json())
     // taking the response object and parsing it to readable format
     .then(json => {
         //debugger
-       // ulTaskList().remove()
+        taskTable().remove()
+        debugger
         renderCompletedTasks(json)
     })
     .catch(handleError)
@@ -214,8 +215,10 @@ const handleCompletedTasks = () => {
 }
 
 const renderCompletedTasks = (tasks) => {
+    
     tasks.data.forEach(({attributes}) => {
-        if (attributes.category_id === 1 && taskTable().children.length < 4) {
+       // taskTable().remove()
+        if (attributes.category_id === 1) {
                 //debugger
                 const table = document.getElementById("task-table")
                 const td1 = document.createElement("td");
@@ -236,6 +239,7 @@ const renderCompletedTasks = (tasks) => {
                 
         
                 table.appendChild(row)
+
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
                 document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
                 document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
@@ -243,6 +247,8 @@ const renderCompletedTasks = (tasks) => {
             handleError()
         }
     })
+    
+    
 }
 
 const handleChecked = (e) => {
@@ -250,7 +256,8 @@ const handleChecked = (e) => {
         if (e.target.checked) {
             debugger
             alert("You have completed this task!")
-            e.target.parentElement.parentElement.category_id === 1
+            const catId = e.target.parentElement.parentElement.querySelector(`input[name="checkbox"]`).dataset.id
+            catId.innerText === 1
         } else if (!e.target.checked) {
             alert("You have unchecked this task.")
         } else {

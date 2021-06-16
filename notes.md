@@ -89,8 +89,16 @@ PROJECT NOTES
     - if the page refreshes, then you need a preventDefault
     - typically with forms, or buttons that send you somewhere else(think href)
 24. Prototypal Inheritance / Prototype
+    - Objects have a prototype object; the prototype object provides methods and properties for which the object inherits. 
     - 
 25. Static
     - static methods are "utility" methods; helper methods
     - defined on a class, but not apart of the instantiated object
     - Neither static methods nor static properties can be called on instances of the class. Instead, they're called on the class itself.
+    - Static methods are class-level methods - they are not callable on instances of a class, only the class itself. These are often used in 'utility' classes - classes that encapsulate a set of related methods but don't need to be made into instances.
+26. Encapsulation
+    - 
+27. Polymorphism
+    -   
+28. JS "Class"
+    - 
