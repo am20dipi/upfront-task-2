@@ -103,6 +103,10 @@ button:hover {
     background-color: #f7c2f9;
 }
 
+button:focus {
+    background-color: #e7b2e9;
+}
+
 
 .checker {
     width: 18px;
@@ -116,5 +120,10 @@ button:hover {
     height: 18px;
     vertical-align: middle;
     position: relative;
+}
+
+input.checker:checked + .row {
+	text-decoration: line-through;
+	color: #656565;
 }
 

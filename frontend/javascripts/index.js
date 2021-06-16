@@ -106,14 +106,13 @@ const renderTasks = (tasks) => {
         document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
         document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
-
     })
+}
     // iterating through the array tasks
     // creating an element li for each task
     // setting the inner html of each li to the specific task's attrs.
     // appending each task to the page under the specified parent 
     // selecting the delete button of that instance and adding event listener
-}
 
 
 const handleDelete = (e) => {
@@ -244,7 +243,6 @@ const renderCompletedTasks = (tasks) => {
 }
 
 const handleChecked = (e) => {
-    debugger
         if (e.target.checked) {
             debugger
             alert("You have completed this task!")
