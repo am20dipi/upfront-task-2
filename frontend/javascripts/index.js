@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // handleClick is a callback function --> we do not invoke it here. 
     submitButton().addEventListener("click", handleSubmit)
     completedTasks().addEventListener("click", handleCompletedTasks)
+    activeTasks().addEventListener("click", handleActiveTasks)
 })
 
 // 3. Functions
@@ -64,13 +65,15 @@ const appendTask = (task) => {
     document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", handleEdit)
     document.querySelector(`input[name="checkbox"]`).addEventListener("change", handleChecked)
+
 }
  
 
 
 const handleClick = () => {
     // anonymous function
-    if (taskTable().children.length < 4) {
+    if (taskTable().children.length < 10) {
+        taskTable().innerHTML = " "
         TaskApi.fetchTasks()
     } else {
         taskTable().innerHTML = " "
@@ -107,6 +110,7 @@ const renderTasks = (tasks) => {
         document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
         document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
     })
+
 }
     // iterating through the array tasks
     // creating an element li for each task
@@ -196,8 +200,7 @@ const handleCompletedTasks = () => {
     // taking the response object and parsing it to readable format
     .then(json => {
         //debugger
-        taskTable().remove()
-        debugger
+        taskTable().innerHTML = ""
         renderCompletedTasks(json)
     })
     .catch(handleError)
@@ -206,11 +209,8 @@ const handleCompletedTasks = () => {
 }
 
 const renderCompletedTasks = (tasks) => {
-    
     tasks.data.forEach(({attributes}) => {
-       // taskTable().remove()
         if (attributes.category_id === 1) {
-                //debugger
                 const table = document.getElementById("task-table")
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
@@ -227,9 +227,10 @@ const renderCompletedTasks = (tasks) => {
                 row.appendChild(td1)
                 row.appendChild(td2)
                 row.appendChild(td3)
+
                 
         
-                table.appendChild(row)
+                table.appendChild(row) 
 
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
                 document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
@@ -253,4 +254,48 @@ const handleChecked = (e) => {
         } else {
             handleError()
         }
+}
+
+const handleActiveTasks = () => {
+    fetch("http://localhost:3000/tasks")
+    .then(resp => resp.json())
+    .then(json => {
+        taskTable().innerHTML = ""
+        renderActiveTasks(json)
+    })
+    .catch(handleError)
+}
+
+const renderActiveTasks = (tasks) => {
+    tasks.data.forEach(({attributes}) => {
+         if (attributes.category_id != 1) {
+                 const table = document.getElementById("task-table")
+                 const td1 = document.createElement("td");
+                 const td2 = document.createElement("td");
+                 const td3 = document.createElement("td"); 
+                 const td4 = document.createElement("td")   
+                 const row = document.createElement("tr");
+         
+                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
+                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
+                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
+                 td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker">`
+         
+                 row.appendChild(td4)
+                 row.appendChild(td1)
+                 row.appendChild(td2)
+                 row.appendChild(td3)
+ 
+                 
+         
+                 table.appendChild(row)
+ 
+                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
+                 document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
+                 document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
+         } else {
+             handleError()
+         }
+     })
+
 }
