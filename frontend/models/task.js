@@ -47,13 +47,12 @@ class Task {
         table.appendChild(row)
         document.querySelector(`button.delete-task[data-id='${this.id}']`).addEventListener("click", TaskApi.handleDelete)
         document.querySelector(`button.edit-task[data-id='${this.id}']`).addEventListener("click", this.handleEdit)
-        document.querySelector(`input[name="checkbox"][data-id='${this.id}']`).addEventListener("change", handleChecked)
+        document.querySelector(`input[name="checkbox"][data-id='${this.id}']`).addEventListener("change", this.handleChecked)
             
     }
 
 
-    replaceElement = (li) => {
-        debugger
+    replaceElement(li) {
         li.innerHTML = `
                 <td><input type="checkbox" name="checkbox" data-id='${this.id}' class="checker"></td>
                 <td><p id="task-name">${this.name}</p></td>
@@ -62,7 +61,7 @@ class Task {
         `
     } 
 
-    handleEdit = (e) => {
+    handleEdit(e) {
         // 1. listen/wait for click event
         // 2. render form with preexisting field input
         // 3. replace current li with new li, map values
@@ -89,5 +88,20 @@ class Task {
         this.category_id = task.category_id
         return this
     }
+
+    handleChecked(e) {
+        if (e.target.checked) {
+            alert("You have completed this task!")
+            const catId = e.target.parentElement.parentElement.querySelector("#task-name")
+            debugger
+        } else if (!e.target.checked) {
+            alert("You have unchecked this task.")
+        } else {
+            handleError()
+        }
+    }
+
+
+
 }
 

@@ -102,3 +102,24 @@ PROJECT NOTES
     -   
 28. JS "Class"
     - 
+
+
+
+   // iterating through the array tasks
+    // creating an element li for each task
+    // setting the inner html of each li to the specific task's attrs.
+    // appending each task to the page under the specified parent 
+    // selecting the delete button of that instance and adding event listener
+
+
+    // 1. fetch to specific endpoint specified by id
+    // 2. remove from page
+    // 3. method: DELETE, headers?
+    // 4. pass in an event bc click = event, event.target == button
+    //debugger
+    // 5. alert message? error message?
+
+    // 1. listen/wait for click event
+    // 2. render form with preexisting field input
+    // 3. replace current li with new li, map values
+    // 4. clear & remove form
