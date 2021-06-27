@@ -58,7 +58,7 @@ const appendTask = (task) => {
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
-        row.appendChild(td5)
+        
         
 
         table.appendChild(row)
@@ -108,21 +108,20 @@ const renderCompletedTasks = (tasks) => {
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
                 const td3 = document.createElement("td"); 
-                const td4 = document.createElement("td"); 
-                const td5 = document.createElement("td");     
+                const td4 = document.createElement("td");      
                 const row = document.createElement("tr");
         
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                 td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" autocomplete="on" checked>`
-                td5.innerHTML = `<p id="category-id" class="hidden">${attributes.category_id}</p>`
+                
         
                 row.appendChild(td4)
                 row.appendChild(td1)
                 row.appendChild(td2)
                 row.appendChild(td3)
-                row.appendChild(td5)
+                
 
                 
         
@@ -151,26 +150,26 @@ const handleActiveTasks = () => {
 
 const renderActiveTasks = (tasks) => {
     tasks.data.forEach(({attributes}) => {
+        debugger
          if (attributes.category_id != 1) {
                  const table = document.getElementById("task-table")
                  const td1 = document.createElement("td");
                  const td2 = document.createElement("td");
                  const td3 = document.createElement("td"); 
-                 const td4 = document.createElement("td");
-                 const td5 = document.createElement("td")   
+                 const td4 = document.createElement("td");  
                  const row = document.createElement("tr");
          
                  td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                  td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                  td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                  td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" autocomplete="on">`
-                 td5.innerHTML = `<p id="category-id" class="hidden">${attributes.category_id}</p>`
+                 
          
                  row.appendChild(td4)
                  row.appendChild(td1)
                  row.appendChild(td2)
                  row.appendChild(td3)
-                 row.appendChild(td5)
+                 
  
                  
          
