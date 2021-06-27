@@ -62,13 +62,6 @@ class TaskApi {
                 task.update(json)
                 task.replaceElement(e.target.parentElement.parentElement)
             })
-    }
-
-    
-
-    
+        }
 
 }
-
-
-//json.forEach(taskObject => new Task(taskObject))

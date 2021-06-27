@@ -13,4 +13,4 @@ const formContainer = () => document.getElementById("form-container")
 const taskName = () => document.getElementById("task-name")
 const categoryId = () => document.getElementById("category-id")
 
-//const checkBox = () => document.querySelector("input[name='checkbox']")
+// const checkBox = document.querySelector("input[name='checkbox']")

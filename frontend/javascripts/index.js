@@ -49,7 +49,7 @@ const appendTask = (task) => {
         const td4 = document.createElement("td")   
         const row = document.createElement("tr");
 
-        td4.innerHTML = `<input type="checkbox" name="checkbox" class="checker">`
+        td4.innerHTML = `<input type="checkbox" name="checkbox" class="checker" autocomplete="on">`
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
@@ -115,7 +115,7 @@ const renderCompletedTasks = (tasks) => {
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-                td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" checked>`
+                td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" autocomplete="on" checked>`
                 td5.innerHTML = `<p id="category-id" class="hidden">${attributes.category_id}</p>`
         
                 row.appendChild(td4)
@@ -163,7 +163,7 @@ const renderActiveTasks = (tasks) => {
                  td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                  td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                  td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-                 td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker">`
+                 td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" autocomplete="on">`
                  td5.innerHTML = `<p id="category-id" class="hidden">${attributes.category_id}</p>`
          
                  row.appendChild(td4)
@@ -183,5 +183,9 @@ const renderActiveTasks = (tasks) => {
              handleError()
          }
      })
+
+     
+
+
 
 }

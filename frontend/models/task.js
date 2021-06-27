@@ -38,9 +38,9 @@ class Task {
         td2.innerHTML  = `<button class="edit-task" data-id="${this.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${this.id}">Delete</button>`
         if (this.category_id === 1){
-            td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker" checked>`
+            td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker" autocomplete="on" checked>`
         } else {
-            td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker">`
+            td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker" autocomplete="on">`
         }
         td5.innerHTML = `<p id="category-id" class="hidden">${this.category_id}</p>`
 
@@ -63,7 +63,7 @@ class Task {
 
     replaceElement(li) {
         li.innerHTML = `
-                <td><input type="checkbox" name="checkbox" data-id='${this.id}' class="checker"></td>
+                <td><input type="checkbox" name="checkbox" data-id='${this.id}' class="checker" autocomplete="on"></td>
                 <td><p id="task-name">${this.name}</p></td>
                 <td><button class="edit-task" data-id="${this.id}">Edit</button></td>
                 <td><button class="delete-task" data-id="${this.id}">Delete</button></td>
@@ -80,7 +80,7 @@ class Task {
             const taskId = e.target.dataset.id
             const name = e.target.parentElement.parentElement.querySelector("#task-name").innerText 
              e.target.parentElement.parentElement.innerHTML = `
-                <td><input type="checkbox" name="checkbox" data-id='${this.id}' class="checker"></td>
+                <td><input type="checkbox" name="checkbox" data-id='${this.id}' class="checker" autocomplete="on"></td>
                 <td><input type="text" id="task-name" name="name" value='${name}'></td>
                 <td><button class="edit-task" data-id="${taskId}">Update</button></td>
                 <td><button class="delete-task" data-id="${taskId}">Delete</button></td>
@@ -103,10 +103,7 @@ class Task {
     handleChecked(e) {
         if (e.target.checked) {
             alert("You have completed this task!")
-            
-            const catId = e.target.parentElement.parentElement.querySelector("#category-id")
-            catId.value = `1`
-            debugger
+            e.target.checked
         } else if (!e.target.checked) {
             alert("You have unchecked this task.")
         } else {
@@ -114,7 +111,11 @@ class Task {
         }
     }
 
+    
 
+
+    
+
+    
 
 }
-
