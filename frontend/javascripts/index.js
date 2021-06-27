@@ -45,27 +45,20 @@ const appendTask = (task) => {
     const table = document.getElementById("task-table")
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
-        const td3 = document.createElement("td"); 
-        const td4 = document.createElement("td")   
+        const td3 = document.createElement("td");   
         const row = document.createElement("tr");
-
-        td4.innerHTML = `<input type="checkbox" name="checkbox" class="checker" autocomplete="on">`
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
         td5.innerHTML = `<p id="category-id" class="hidden">${task.category_id}</p>`
-        row.appendChild(td4)
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
         
-        
-
         table.appendChild(row)
     
     document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", handleEdit)
-    document.querySelector(`input[name="checkbox"]`).addEventListener("change", handleChecked)
 
 }
  
@@ -87,18 +80,12 @@ const handleError = (error) => {
 
 const handleCompletedTasks = () => {
     fetch("http://localhost:3000/tasks")
-    // fetch takes in an endpoint as an argument
-    // fetch returns Promise objects
     .then(resp => resp.json())
-    // taking the response object and parsing it to readable format
     .then(json => {
-        //debugger
         taskTable().innerHTML = ""
         renderCompletedTasks(json)
     })
     .catch(handleError)
-    // taking the parsed data and passing it through a function renderTasks
-    // using .catch to handle errors, passing in a function I created below
 }
 
 const renderCompletedTasks = (tasks) => {
@@ -107,29 +94,21 @@ const renderCompletedTasks = (tasks) => {
                 const table = document.getElementById("task-table")
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
-                const td3 = document.createElement("td"); 
-                const td4 = document.createElement("td");      
+                const td3 = document.createElement("td");     
                 const row = document.createElement("tr");
         
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-                td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" autocomplete="on" checked>`
-                
         
-                row.appendChild(td4)
                 row.appendChild(td1)
                 row.appendChild(td2)
                 row.appendChild(td3)
-                
-
-                
-        
+            
                 table.appendChild(row) 
 
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
                 document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", Task.handleEdit)
-                document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", Task.handleChecked)
         } else {
             handleError()
         }
@@ -150,41 +129,29 @@ const handleActiveTasks = () => {
 
 const renderActiveTasks = (tasks) => {
     tasks.data.forEach(({attributes}) => {
-        debugger
          if (attributes.category_id != 1) {
                  const table = document.getElementById("task-table")
                  const td1 = document.createElement("td");
                  const td2 = document.createElement("td");
                  const td3 = document.createElement("td"); 
-                 const td4 = document.createElement("td");  
+
                  const row = document.createElement("tr");
          
                  td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                  td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                  td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-                 td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" autocomplete="on">`
                  
          
-                 row.appendChild(td4)
                  row.appendChild(td1)
                  row.appendChild(td2)
                  row.appendChild(td3)
-                 
- 
-                 
          
                  table.appendChild(row)
  
                  document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
                  document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
-                 document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
          } else {
              handleError()
          }
      })
-
-     
-
-
-
 }

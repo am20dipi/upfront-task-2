@@ -108,22 +108,13 @@ button:focus {
     background-color: #f9c2e4;
 }
 
-
-.checker {
-    width: 18px;
-    height: 18px;
-    position: relative;
+tr:hover {
+    background-color: #eee4ea;
+    cursor: pointer;
 }
 
-.checker input,
-.checker span {
-    width: 18px;
-    height: 18px;
-    vertical-align: middle;
-    position: relative;
-}
 
-input.checker:checked + .row {
+.task-name:clicked + tr {
 	text-decoration: line-through;
 	color: #656565;
 }
