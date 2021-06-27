@@ -30,18 +30,27 @@ class Task {
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
         const td3 = document.createElement("td"); 
-        const td4 = document.createElement("td")   
+        const td4 = document.createElement("td")  
+        const td5 = document.createElement("td") 
         const row = document.createElement("tr");
 
         td1.innerHTML = `<p id="task-name">${this.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${this.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${this.id}">Delete</button>`
-        td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker">`
+        if (this.category_id === 1){
+            td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker" checked>`
+        } else {
+            td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${this.id}' class="checker">`
+        }
+        td5.innerHTML = `<p id="category-id" class="hidden">${this.category_id}</p>`
+
+        
 
         row.appendChild(td4)
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
+        row.appendChild(td5)
         
 
         table.appendChild(row)
@@ -58,6 +67,7 @@ class Task {
                 <td><p id="task-name">${this.name}</p></td>
                 <td><button class="edit-task" data-id="${this.id}">Edit</button></td>
                 <td><button class="delete-task" data-id="${this.id}">Delete</button></td>
+                <td><p id="category-id" class="hidden">${this.category_id}</p></td>
         `
     } 
 
@@ -74,6 +84,7 @@ class Task {
                 <td><input type="text" id="task-name" name="name" value='${name}'></td>
                 <td><button class="edit-task" data-id="${taskId}">Update</button></td>
                 <td><button class="delete-task" data-id="${taskId}">Delete</button></td>
+                <td><p id="category-id" class="hidden">${this.category_id}</p></td>
                 `
                 document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleDelete)
                 document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleUpdate)
@@ -92,7 +103,9 @@ class Task {
     handleChecked(e) {
         if (e.target.checked) {
             alert("You have completed this task!")
-            const catId = e.target.parentElement.parentElement.querySelector("#task-name")
+            
+            const catId = e.target.parentElement.parentElement.querySelector("#category-id")
+            catId.value = `1`
             debugger
         } else if (!e.target.checked) {
             alert("You have unchecked this task.")

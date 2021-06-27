@@ -53,11 +53,12 @@ const appendTask = (task) => {
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
-        
+        td5.innerHTML = `<p id="category-id" class="hidden">${task.category_id}</p>`
         row.appendChild(td4)
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
+        row.appendChild(td5)
         
 
         table.appendChild(row)
@@ -107,26 +108,29 @@ const renderCompletedTasks = (tasks) => {
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
                 const td3 = document.createElement("td"); 
-                const td4 = document.createElement("td")   
+                const td4 = document.createElement("td"); 
+                const td5 = document.createElement("td");     
                 const row = document.createElement("tr");
         
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                 td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker" checked>`
+                td5.innerHTML = `<p id="category-id" class="hidden">${attributes.category_id}</p>`
         
                 row.appendChild(td4)
                 row.appendChild(td1)
                 row.appendChild(td2)
                 row.appendChild(td3)
+                row.appendChild(td5)
 
                 
         
                 table.appendChild(row) 
 
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
-                document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleEdit)
-                document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", TaskApi.handleChecked)
+                document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", Task.handleEdit)
+                document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", Task.handleChecked)
         } else {
             handleError()
         }
@@ -152,24 +156,27 @@ const renderActiveTasks = (tasks) => {
                  const td1 = document.createElement("td");
                  const td2 = document.createElement("td");
                  const td3 = document.createElement("td"); 
-                 const td4 = document.createElement("td")   
+                 const td4 = document.createElement("td");
+                 const td5 = document.createElement("td")   
                  const row = document.createElement("tr");
          
                  td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                  td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                  td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                  td4.innerHTML = `<input type="checkbox" name="checkbox" data-id='${attributes.id}' class="checker">`
+                 td5.innerHTML = `<p id="category-id" class="hidden">${attributes.category_id}</p>`
          
                  row.appendChild(td4)
                  row.appendChild(td1)
                  row.appendChild(td2)
                  row.appendChild(td3)
+                 row.appendChild(td5)
  
                  
          
                  table.appendChild(row)
  
-                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", handleDelete)
+                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
                  document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
                  document.querySelector(`input[name="checkbox"][data-id='${attributes.id}']`).addEventListener("change", handleChecked)
          } else {

@@ -11,6 +11,7 @@ PROJECT NOTES
 3. ARROW FUNCTIONS
     - provides a shorter syntax to a typical function expression
     - cannot be used a function constructor i.e "new"
+    - implicit returns on single line arrow functions only
 4. ES6
      - ECMASCRIPT
      - changes & updates to JS
@@ -46,7 +47,8 @@ PROJECT NOTES
     - SYNTAX =>Object.assign(firstObj, secondObj)
     - the return value is the firstObj after the secondObj's properties have been merged in
 11. CLOSURE
-    -
+    - defining a function inside of another function
+    - the inner function has access to the outer function's lexical environment
 12. SERIALIZERS
      - serializing: modifying what data(such as specific attributes) is allowed/to show
      - serializer classes respond to model associations!
@@ -64,15 +66,16 @@ PROJECT NOTES
      - generator used for backend
      - creates table, model class, resources, routes, controller, etc.
 16. CALLBACK FUNCTIONS
-
+    - functions that will be invoked at a later time
+    - a function passed into another function as one of its arguments. 
 17. FUNCTION EXPRESSIONS
-
+    - defining a function within an expression of a variable
 18. DESTRUCTURING
     - allows us to quickly map variables to a collection of data
-    - 
+    - assigning variable names to values in a single moment
 19. CONSTRUCTOR FUNCTIONS
-
-
+    - a function that initializes an object with key-value pair properties. 
+    - an object method for creating and initializing an object of that class. 
 20. event.target
     - will always return the element that triggered the event
     - usually a button 
@@ -102,6 +105,9 @@ PROJECT NOTES
     -   
 28. JS "Class"
     - 
+29. SCOPE CHAIN
+    - upon being invoked, a function creates a new scope and retains reference to the outer scope in which it was declared.
+30.
 
 
 
