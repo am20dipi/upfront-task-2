@@ -72,7 +72,6 @@ class Task {
                 `
                 document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleDelete)
                 document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleUpdate)
-
         } else {
             TaskApi.handleUpdate(e)
         }

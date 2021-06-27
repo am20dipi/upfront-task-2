@@ -59,6 +59,9 @@ const appendTask = (task) => {
     
     document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", handleEdit)
+    taskName().addEventListener("click", function(){
+        taskName().innerText.toggleClass('strike')
+    })
 
 }
  
@@ -90,7 +93,7 @@ const handleCompletedTasks = () => {
 
 const renderCompletedTasks = (tasks) => {
     tasks.data.forEach(({attributes}) => {
-        if (attributes.category_id === 1) {
+        if (attributes.completed == true) {
                 const table = document.getElementById("task-table")
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
@@ -129,7 +132,7 @@ const handleActiveTasks = () => {
 
 const renderActiveTasks = (tasks) => {
     tasks.data.forEach(({attributes}) => {
-         if (attributes.category_id != 1) {
+         if (attributes.completed == false) {
                  const table = document.getElementById("task-table")
                  const td1 = document.createElement("td");
                  const td2 = document.createElement("td");
@@ -150,6 +153,7 @@ const renderActiveTasks = (tasks) => {
  
                  document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
                  document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
+
          } else {
              handleError()
          }

@@ -44,6 +44,8 @@ td, th {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid rgb(155, 149, 149);
+    margin: 1em;
+    border-radius: 3px;
 
 }
 
@@ -109,15 +111,17 @@ button:focus {
 }
 
 tr:hover {
-    background-color: #eee4ea;
+    background-color: #e4e8ee;
     cursor: pointer;
+    transition: 0.5s;
 }
 
-
-.task-name:clicked + tr {
-	text-decoration: line-through;
-	color: #656565;
+tr {
+    border-radius: 3px;
+    padding: 1em;
+    margin: 1em;
 }
+
 
 .footer {
     position: fixed;
