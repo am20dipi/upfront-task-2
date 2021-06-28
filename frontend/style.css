@@ -68,6 +68,19 @@ td, th {
     cursor: pointer;
 }
 
+.custom-field-2 input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: 12px;
+    width: 200px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 .custom-submit input {
     border: none;
     -webkit-appearance: none;
