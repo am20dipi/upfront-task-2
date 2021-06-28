@@ -10,17 +10,20 @@ const myTasks = () => {
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
                 const td3 = document.createElement("td"); 
-                const td4 = document.createElement("td");    
+                const td4 = document.createElement("td"); 
+                const p = document.createElement("p");   
                 const row = document.createElement("tr");
         
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                 td4.innerHTML = `<button class="complete-task" data-id="${attributes.id}">Done!</button>`
+                p.innerHTML = `<p id="task-completed" class="hidden"></p>`
                 row.appendChild(td1)
                 row.appendChild(td2)
                 row.appendChild(td3)
                 row.appendChild(td4)
+                row.appendChild(p)
                 table.appendChild(row) 
 
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
@@ -55,17 +58,19 @@ const appendTask = (task) => {
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");   
         const td4 = document.createElement("td");
+        const p = document.createElement("p");
         const row = document.createElement("tr");
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
         td4.innerHTML  = `<button class="complete-task" data-id="${task.id}">Done!</button>`
+        p.innerHTML = `<p id="task-completed" class="hidden"></p>`
 
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
         row.appendChild(td4)
-        
+        row.appendChild(p)
         table.prepend(row)
     document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", TaskApi.handleDelete)
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", Task.handleEdit)
@@ -78,12 +83,6 @@ const fetchCategoriesForSelect = () => {
             .then(json => json.map((catObj) => `<option value="${catObj.id}">${catObj.name}</option>`))
             .then(collection => document.querySelector("select#category_id").innerHTML = collection.join(" "))
 }
-
-const renderCategories = (categories) => {
-    categories.forEach(element => renderCategory(element));
-}
-
- 
 
 
 const handleClick = () => {
@@ -112,7 +111,7 @@ const handleCompletedTasks = () => {
 
 const renderCompletedTasks = (tasks) => {
     tasks.data.forEach(({attributes}) => {
-        if (attributes.completed === true) {
+        if (attributes.completed.value === "true") {
             myTasks()
         } else {
             handleError()

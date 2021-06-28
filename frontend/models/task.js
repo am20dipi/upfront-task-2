@@ -25,17 +25,20 @@ class Task {
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
         const td4 = document.createElement("td"); 
+        const p = document.createElement("p");
         const row = document.createElement("tr");
 
         td1.innerHTML = `<p id="task-name">${this.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${this.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${this.id}">Delete</button>`
         td4.innerHTML = `<button class="complete-task" data-id="${this.id}">Done!</button>`
+        p.innerHTML = `<p id="task-completed" class="hidden"></p>`
 
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
         row.appendChild(td4)
+        row.appendChild(p)
         table.appendChild(row)
 
         //debugger
@@ -52,6 +55,7 @@ class Task {
                 <td><button class="edit-task" data-id="${this.id}">Edit</button></td>
                 <td><button class="delete-task" data-id="${this.id}">Delete</button></td>
                 <td><button class="complete-task" data-id="${this.id}">Done!</button></td>
+                <p id="task-completed" class="hidden"></p>
                 `
     } 
 
@@ -62,6 +66,7 @@ class Task {
              e.target.parentElement.parentElement.innerHTML = `
                 <td><input type="text" id="task-name" name="name" value='${name}'></td>
                 <td><button class="edit-task" data-id="${taskId}">Update</button></td>
+                <p id="task-completed" class="hidden"></p>
                 `
                 document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleUpdate)
         } else {
@@ -76,9 +81,9 @@ class Task {
 
     handleComplete(e){
         if (e.target.innerText === 'Done!') {
-            const taskCompleted = e.target.parentElement.parentElement.querySelector("#task-completed")
+            /* const taskCompleted = e.target.parentElement.parentElement.querySelector("#task-completed")
             debugger
-            taskCompleted.value() === "true"
+            taskCompleted.innerHTML = `<p id="task-completed" class="hidden" value="true"></p>` */
             const taskId = e.target.dataset.id
             const name = e.target.parentElement.parentElement.querySelector("#task-name").innerText
             //const category = e.target.parentElement.parentElement.querySelector("#category-name").innerText 

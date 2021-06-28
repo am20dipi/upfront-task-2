@@ -1,6 +1,4 @@
 // services -- connection to the backend
-
-
 class TaskApi {
     static fetchTasks() {
         fetch('http://localhost:3000/tasks')
