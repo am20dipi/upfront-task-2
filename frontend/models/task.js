@@ -36,7 +36,7 @@ class Task {
 
 
         row.appendChild(td1)
-        row.appendChild(td5)
+        //row.appendChild(td5)
         row.appendChild(td2)
         row.appendChild(td3)
         row.appendChild(td4)

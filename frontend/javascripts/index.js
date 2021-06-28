@@ -83,7 +83,7 @@ const appendTask = (task) => {
 
 const handleClick = () => {
     debugger
-    if (taskTable().children.length < 1) {
+    if (taskTable().children.length < 10) {
         taskTable().innerHTML = " "
         TaskApi.fetchTasks()
     } else {
