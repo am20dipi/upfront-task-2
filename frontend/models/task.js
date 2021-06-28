@@ -29,7 +29,7 @@ class Task {
         const row = document.createElement("tr");
 
         td1.innerHTML = `<p id="task-name">${this.name}</p>`
-        td5.innerHTML = `<p id="category-name">${this.category_id}</p>`
+        td5.innerHTML = `<p id="category-id">${this.category_id}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${this.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${this.id}">Delete</button>`
         td4.innerHTML = `<button class="complete-task" data-id="${this.id}">Done!</button>`
