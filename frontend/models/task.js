@@ -81,7 +81,9 @@ class Task {
 
     handleComplete(e){
         if (e.target.innerText === 'Done!') {
+            const taskCompleted = e.target.parentElement.parentElement.querySelector("#task-completed")
             debugger
+            taskCompleted.value() === "true"
             const taskId = e.target.dataset.id
             const name = e.target.parentElement.parentElement.querySelector("#task-name").innerText 
              e.target.parentElement.parentElement.innerHTML = `
@@ -93,10 +95,10 @@ class Task {
                 `
                 document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleDelete)
                 document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", this.handleEdit)
-
+            
         }
-
     }
+
 
     
 

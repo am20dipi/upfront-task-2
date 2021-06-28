@@ -3,15 +3,11 @@
 
 class TaskApi {
     static fetchTasks() {
-        // 1. fetch from handleClick in index.js
-        // 2. change secondary .then() to iterate through each json instance
-        // 3. render ?
         fetch('http://localhost:3000/tasks')
         .then(resp => resp.json())
         .then(json => {
             json.data.forEach(({attributes}) => {
                 const task = new Task(attributes)
-
                 task.render()
             })
         })
@@ -24,14 +20,12 @@ class TaskApi {
 
     static handleDelete(e) {
         fetch(`http://localhost:3000/tasks/${e.target.dataset.id}`, {
-        method: 'DELETE',
-        headers: {
-            "Content-Type": 'application/json'
-
-        }
+            method: 'DELETE',
+            headers: {
+                "Content-Type": 'application/json'
+            }
         })
         .then(resp => {
-            //debugger
             alert("Successfully Deleted")
             e.target.parentElement.parentElement.remove()
         })
@@ -46,18 +40,16 @@ class TaskApi {
             method: 'PATCH',
             headers: {
                 "Content-Type": 'application/json'
-    
             },
-            body: JSON.stringify(updateData)
-                
+            body: JSON.stringify(updateData) 
             })
-            .then(resp => resp.json())
-            .then(json => {
-                alert("Successfully Updated")
-                const task = Task.findById(json.id)
-                task.update(json)
-                task.replaceElement(e.target.parentElement.parentElement)
-            })
-        }
+        .then(resp => resp.json())
+        .then(json => {
+            alert("Successfully Updated")
+            const task = Task.findById(json.id)
+            task.update(json)
+            task.replaceElement(e.target.parentElement.parentElement)
+        })
+    }
 
 }

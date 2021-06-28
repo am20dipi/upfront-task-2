@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    tasks = Task.all
+    tasks = Task.all.most_recent
     render json: TaskSerializer.new(tasks)
     # render json is implicitly invoking a method on its own 
     # render json turns data into JSON
