@@ -45,11 +45,21 @@ td, th {
     text-align: center;
     border-bottom: 1px solid rgb(155, 149, 149);
     margin: 1em;
-    border-radius: 3px;
 
 }
 
-
+select {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: 12px;
+    width: 200px;
+    font-size: 14px;
+    cursor: pointer;
+}
 
 .hidden {
     display: none;
@@ -123,10 +133,7 @@ button:focus {
     background-color: #f9c2e4;
 }
 
-
-
 tr {
-    border-radius: 3px;
     padding: 1em;
     margin: 1em;
 }

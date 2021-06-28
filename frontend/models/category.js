@@ -1,5 +1,5 @@
 class Category {
-    static all = []
+   /*  static all = []
     static dropDownOptions = []
 
     constructor({name, id, products = []}){
@@ -25,7 +25,7 @@ class Category {
         const option = document.createElement("option")
         option.value = this.id
         option.innerText = this.name
-        productSelectCategory().append(option)
+        taskCategory().append(option)
     }
 
     render() {
@@ -33,11 +33,9 @@ class Category {
         const a = document.createElement("a")
         a.id = `category-${this.id}`
         a.innerText = this.name
-        a.href = "####"
-        a.addEventListener("click", this.render)
         h4.appendChild(a)
-        categoriesSection().appendChild(h4)
-    }
+        taskCategory().appendChild(h4)
+    } */
 
  
 

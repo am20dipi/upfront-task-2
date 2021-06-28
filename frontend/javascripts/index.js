@@ -32,7 +32,7 @@ const handleSubmit = (e) => {
     e.preventDefault()
     const data = {
         name: taskName().value,
-        category_id: categoryId().value
+        category_id: taskCategory().value
     }
      fetch('http://localhost:3000/tasks', {
          method: 'POST',
@@ -70,6 +70,17 @@ const appendTask = (task) => {
     document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", TaskApi.handleDelete)
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", Task.handleEdit)
     document.querySelector(`button.complete-task[data-id='${task.id}']`).addEventListener("click", Task.handleComplete)
+}
+
+const fetchCategoriesForSelect = () => {
+    fetch('http://localhost:3000/categories')
+            .then(resp => resp.json())
+            .then(json => json.map((catObj) => `<option value="${catObj.id}">${catObj.name}</option>`))
+            .then(collection => document.querySelector("select#category_id").innerHTML = collection.join(" "))
+}
+
+const renderCategories = (categories) => {
+    categories.forEach(element => renderCategory(element));
 }
 
  
