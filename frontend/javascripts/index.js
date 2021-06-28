@@ -1,37 +1,44 @@
-// 2. Events
-    // DOMContentLoaded => when the DOM finishes loading, listen for the specified events 
-
 document.addEventListener("DOMContentLoaded", () => {
     showTasksButton().addEventListener("click", handleClick)
-    // invoking showTasksButton and creating a click event listener
-    // handleClick is a callback function --> we do not invoke it here. 
     submitButton().addEventListener("click", handleSubmit)
     completedTasks().addEventListener("click", handleCompletedTasks)
     activeTasks().addEventListener("click", handleActiveTasks)
 })
 
-// 3. Functions
+const myTasks = () => {
+    const table = document.getElementById("task-table")
+                const td1 = document.createElement("td");
+                const td2 = document.createElement("td");
+                const td3 = document.createElement("td");     
+                const row = document.createElement("tr");
+        
+                td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
+                td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
+                td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
+                td4.innerHTML = `<button class="complete-task" data-id="${attributes.id}">Done!</button>`
+                row.appendChild(td1)
+                row.appendChild(td2)
+                row.appendChild(td3)
+                row.appendChild(td4)
+            
+                table.appendChild(row) 
+
+                document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
+                document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", Task.handleEdit)
+                document.querySelector(`button.complete-task[data-id='${attributes.id}']`).addEventListener("click", Task.handleComplete)
+}
+
 const handleSubmit = (e) => {
-    // 1. prevent default
-    // 2. fetch to endpoint, POST, body, headers
-    // 3. collect form data & send to db
-    // 4. clear form and remove form
     e.preventDefault()
     const data = {
         name: taskName().value
     }
-    // setting object "data" to the values of each input field
-    // creating an object with keyvalue pairs
      fetch('http://localhost:3000/tasks', {
          method: 'POST',
          headers: {
              'Content-Type': 'application/json',
          },
-            // headers point to a nested object with keyvalue pairs
-            // content-type => the type of data sent & received
          body: JSON.stringify(data)
-         // the data being sent back 
-         // data object must be stringified, so I use JSON.stringify
      })
      .then(resp => resp.json())
      .then(json => {
@@ -46,29 +53,28 @@ const appendTask = (task) => {
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");   
+        const td4 = document.createElement("td");
         const row = document.createElement("tr");
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
-        td5.innerHTML = `<p id="category-id" class="hidden">${task.category_id}</p>`
+        td4.innerHTML  = `<button class="complete-task" data-id="${task.id}">Done!</button>`
+
         row.appendChild(td1)
         row.appendChild(td2)
         row.appendChild(td3)
+        row.appendChild(td4)
         
         table.appendChild(row)
     
-    document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", handleDelete)
-    document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", handleEdit)
-    taskName().addEventListener("click", function(){
-        taskName().innerText.toggleClass('strike')
-    })
-
+    document.querySelector(`button.delete-task[data-id='${task.id}']`).addEventListener("click", TaskApi.handleDelete)
+    document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", Task.handleEdit)
+    document.querySelector(`button.complete-task[data-id='${task.id}']`).addEventListener("click", Task.handleComplete)
 }
  
 
 
 const handleClick = () => {
-    // anonymous function
     if (taskTable().children.length < 10) {
         taskTable().innerHTML = " "
         TaskApi.fetchTasks()
@@ -93,31 +99,13 @@ const handleCompletedTasks = () => {
 
 const renderCompletedTasks = (tasks) => {
     tasks.data.forEach(({attributes}) => {
-        if (attributes.completed == true) {
-                const table = document.getElementById("task-table")
-                const td1 = document.createElement("td");
-                const td2 = document.createElement("td");
-                const td3 = document.createElement("td");     
-                const row = document.createElement("tr");
-        
-                td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
-                td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
-                td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-        
-                row.appendChild(td1)
-                row.appendChild(td2)
-                row.appendChild(td3)
-            
-                table.appendChild(row) 
-
-                document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
-                document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", Task.handleEdit)
+        if (attributes.completed === true) {
+            myTasks()
         } else {
             handleError()
         }
     })
 }
-
 
 
 const handleActiveTasks = () => {
@@ -131,29 +119,10 @@ const handleActiveTasks = () => {
 }
 
 const renderActiveTasks = (tasks) => {
+    debugger
     tasks.data.forEach(({attributes}) => {
          if (attributes.completed == false) {
-                 const table = document.getElementById("task-table")
-                 const td1 = document.createElement("td");
-                 const td2 = document.createElement("td");
-                 const td3 = document.createElement("td"); 
-
-                 const row = document.createElement("tr");
-         
-                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
-                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
-                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
-                 
-         
-                 row.appendChild(td1)
-                 row.appendChild(td2)
-                 row.appendChild(td3)
-         
-                 table.appendChild(row)
- 
-                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
-                 document.querySelector(`button.edit-task[data-id='${attributes.id}']`).addEventListener("click", handleEdit)
-
+            myTasks()
          } else {
              handleError()
          }

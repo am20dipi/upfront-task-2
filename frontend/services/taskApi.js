@@ -15,11 +15,7 @@ class TaskApi {
                 task.render()
             })
         })
-        .catch(handleError)
-        // fetch takes in an endpoint as an argument
-        // fetch returns Promise objects
-        // taking the response object and parsing it to readable format
-        
+        .catch(handleError)     
     }
 
     static handleError(error) {
