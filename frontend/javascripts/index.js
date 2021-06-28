@@ -10,21 +10,17 @@ const myTasks = () => {
                 const td1 = document.createElement("td");
                 const td2 = document.createElement("td");
                 const td3 = document.createElement("td"); 
-                const td4 = document.createElement("td");
-                const td5= document.createElement("td");    
+                const td4 = document.createElement("td");    
                 const row = document.createElement("tr");
         
                 td1.innerHTML = `<p id="task-name">${attributes.name}</p>`
-                td5.innerHTML = `<p id="category-name">${attributes.category_id.name}</p>`
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                 td4.innerHTML = `<button class="complete-task" data-id="${attributes.id}">Done!</button>`
                 row.appendChild(td1)
-                row.appendChild(td5)
                 row.appendChild(td2)
                 row.appendChild(td3)
                 row.appendChild(td4)
-            
                 table.appendChild(row) 
 
                 document.querySelector(`button.delete-task[data-id='${attributes.id}']`).addEventListener("click", TaskApi.handleDelete)
@@ -59,16 +55,13 @@ const appendTask = (task) => {
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");   
         const td4 = document.createElement("td");
-        const td5 = document.createElement("td");
         const row = document.createElement("tr");
         td1.innerHTML = `<p id="task-name">${task.name}</p>`
-        td5.innerHTML = `<p id="category-name">${task.category_id.name}</p>`
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
         td4.innerHTML  = `<button class="complete-task" data-id="${task.id}">Done!</button>`
 
         row.appendChild(td1)
-        row.appendChild(td5)
         row.appendChild(td2)
         row.appendChild(td3)
         row.appendChild(td4)
@@ -78,6 +71,7 @@ const appendTask = (task) => {
     document.querySelector(`button.edit-task[data-id='${task.id}']`).addEventListener("click", Task.handleEdit)
     document.querySelector(`button.complete-task[data-id='${task.id}']`).addEventListener("click", Task.handleComplete)
 }
+
  
 
 

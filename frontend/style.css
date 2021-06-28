@@ -97,7 +97,7 @@ td, th {
 }
 
 .custom-submit:hover input {
-    background-color: #f7c2f9;
+    background-color: #f9c2e4;
 }
 
 button {
@@ -123,11 +123,7 @@ button:focus {
     background-color: #f9c2e4;
 }
 
-tr:hover {
-    background-color: #e4e8ee;
-    cursor: pointer;
-    transition: 0.5s;
-}
+
 
 tr {
     border-radius: 3px;
