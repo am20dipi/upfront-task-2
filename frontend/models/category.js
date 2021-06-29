@@ -1,11 +1,10 @@
 class Category {
-   /*  static all = []
-    static dropDownOptions = []
+   static all = []
+    
 
-    constructor({name, id, products = []}){
+    constructor({name, id, tasks = []}){
         this.name = name
         this.id = id
-        // this.products = products
         Category.all.push(this)
     }
 
@@ -21,7 +20,7 @@ class Category {
          return this.all.find(category => category.id === id)
     }
 
-    addToDropDown() {
+    /* addToDropDown() {
         const option = document.createElement("option")
         option.value = this.id
         option.innerText = this.name
@@ -35,7 +34,7 @@ class Category {
         a.innerText = this.name
         h4.appendChild(a)
         taskCategory().appendChild(h4)
-    } */
+    }  */
 
  
 

@@ -9,8 +9,10 @@ class TaskApi {
                 task.render()
             })
         })
-        .catch(handleError)     
+        .catch(handleError)
+
     }
+   
 
     static handleError(error) {
         console.log(error)
