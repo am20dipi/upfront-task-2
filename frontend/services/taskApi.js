@@ -10,7 +10,6 @@ class TaskApi {
             })
         })
         .catch(handleError)
-
     }
    
 
@@ -29,6 +28,7 @@ class TaskApi {
             alert("Successfully Deleted")
             e.target.parentElement.parentElement.remove()
         })
+        .catch(handleError)
     }
 
 
@@ -50,6 +50,57 @@ class TaskApi {
             task.update(json)
             task.replaceElement(e.target.parentElement.parentElement)
         })
+        .catch(handleError)
+    }
+
+    static handleActiveTasks(){
+        fetch("http://localhost:3000/tasks")
+        .then(resp => resp.json())
+        .then(json => {
+            taskTable().innerHTML = ""
+            Task.renderActiveTasks(json)
+        })
+        .catch(handleError)
+    }
+
+    static handleCompletedTasks() {
+        fetch("http://localhost:3000/tasks")
+        .then(resp => resp.json())
+        .then(json => {
+            taskTable().innerHTML = ""
+            Task.renderCompletedTasks(json)
+        })
+        .catch(handleError)
+    }
+
+    static handleMiscTasks(){
+        fetch("http://localhost:3000/tasks")
+        .then(resp => resp.json())
+        .then(json => {
+            taskTable().innerHTML = ""
+            Task.renderMiscTasks(json)
+        })
+        .catch(handleError)
+    }
+
+    static handleWorkTasks(){
+        fetch("http://localhost:3000/tasks")
+        .then(resp => resp.json())
+        .then(json => {
+            taskTable().innerHTML = ""
+            Task.renderWorkTasks(json)
+        })
+        .catch(handleError)
+    }
+
+    static handleSchoolTasks() {
+        fetch("http://localhost:3000/tasks")
+        .then(resp => resp.json())
+        .then(json => {
+            taskTable().innerHTML = ""
+            Task.renderSchoolTasks(json)
+        })
+        .catch(handleError)
     }
 
 }
