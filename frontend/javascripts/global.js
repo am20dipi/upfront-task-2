@@ -14,3 +14,4 @@ const taskCategory = () => document.getElementById("category_id")
 const taskCompleted = () => document.getElementById("task-completed")
 const ulTaskList = () => document.getElementById("task-list")
 const dropDown = () => document.querySelector(".dropdown")
+

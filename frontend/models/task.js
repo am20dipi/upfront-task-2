@@ -23,8 +23,8 @@ class Task {
         const table = document.getElementById("task-table")
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
-        const td3 = document.createElement("td");
-        const td4 = document.createElement("td"); 
+        const td3 = document.createElement("td");   
+        const td4 = document.createElement("td");
         const p = document.createElement("p");
         const row = document.createElement("tr");
 
@@ -41,7 +41,6 @@ class Task {
         row.appendChild(p)
         table.appendChild(row)
 
-        //debugger
         document.querySelector(`button.delete-task[data-id='${this.id}']`).addEventListener("click", TaskApi.handleDelete)
         document.querySelector(`button.edit-task[data-id='${this.id}']`).addEventListener("click", this.handleEdit)
         document.querySelector(`button.complete-task[data-id='${this.id}']`).addEventListener("click", this.handleComplete)
@@ -81,12 +80,8 @@ class Task {
 
     handleComplete(e){
         if (e.target.innerText === 'Done!') {
-            /* const taskCompleted = e.target.parentElement.parentElement.querySelector("#task-completed")
-            debugger
-            taskCompleted.innerHTML = `<p id="task-completed" class="hidden" value="true"></p>` */
             const taskId = e.target.dataset.id
             const name = e.target.parentElement.parentElement.querySelector("#task-name").innerText
-            //const category = e.target.parentElement.parentElement.querySelector("#category-name").innerText 
              e.target.parentElement.parentElement.innerHTML = `
                 <td><p id="task-name">${name}</p></td>
                 <td><button class="edit-task" data-id="${taskId}">Edit</button></td>
@@ -96,11 +91,7 @@ class Task {
                 `
                 document.querySelector(`button.delete-task[data-id='${taskId}']`).addEventListener("click", TaskApi.handleDelete)
                 document.querySelector(`button.edit-task[data-id='${taskId}']`).addEventListener("click", this.handleEdit)
-            
-        }
+
+        }    
     }
-
-
-    
-
 }
