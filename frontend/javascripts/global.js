@@ -1,7 +1,3 @@
-// 1. Declaring "getter" Functions
-    // calling on the document object to retrieve the element classified under the specified argument
-
-
 const showTasksButton = () => document.querySelector(".show-tasks")
 const submitButton = () => document.getElementById("submit-button")
 const completedTasks = () => document.querySelector(".completed-tasks")
@@ -16,3 +12,5 @@ const formContainer = () => document.getElementById("form-container")
 const taskName = () => document.getElementById("task-name")
 const taskCategory = () => document.getElementById("category_id")
 const taskCompleted = () => document.getElementById("task-completed")
+const ulTaskList = () => document.getElementById("task-list")
+const dropDown = () => document.querySelector(".dropdown")

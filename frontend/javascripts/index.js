@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     miscTasks().addEventListener("click", handleMiscTasks)
     schoolTasks().addEventListener("click", handleSchoolTasks)
     workTasks().addEventListener("click", handleWorkTasks)
+    dropDown().addEventListener("click", fetchCategoriesForSelect)
 })
 
 const myTasks = (attributes) => {
@@ -21,7 +22,7 @@ const myTasks = (attributes) => {
                 td2.innerHTML  = `<button class="edit-task" data-id="${attributes.id}">Edit</button>`
                 td3.innerHTML  = `<button class="delete-task" data-id="${attributes.id}">Delete</button>`
                 td4.innerHTML = `<button class="complete-task" data-id="${attributes.id}">Done!</button>`
-                p.innerHTML = `<p id="task-completed" data-id="${attributes.id}" value="" class="hidden"></p>`
+                p.innerHTML = `<p id="task-completed" data-id="${attributes.id}" value="${task.category_id}" class="hidden"></p>`
                 row.appendChild(td1)
                 row.appendChild(td2)
                 row.appendChild(td3)
@@ -67,7 +68,7 @@ const appendTask = (task) => {
         td2.innerHTML  = `<button class="edit-task" data-id="${task.id}">Edit</button>`
         td3.innerHTML  = `<button class="delete-task" data-id="${task.id}">Delete</button>`
         td4.innerHTML  = `<button class="complete-task" data-id="${task.id}">Done!</button>`
-        p.innerHTML = `<p id="task-completed" data-id="${task.id}" value="" class="hidden"></p>`
+        p.innerHTML = `<p id="task-completed" data-id="${task.id}" value="${task.category_id}" class="hidden"></p>`
 
         row.appendChild(td1)
         row.appendChild(td2)
@@ -80,12 +81,15 @@ const appendTask = (task) => {
     document.querySelector(`button.complete-task[data-id='${task.id}']`).addEventListener("click", Task.handleComplete)
 }
 
-const fetchCategoriesForSelect = () => {
-    fetch('http://localhost:3000/categories')
+const fetchCategoriesForSelect = (e) => {
+    if (e.target.matches('.dropdown')) {
+        fetch('http://localhost:3000/categories')
             .then(resp => resp.json())
-            .then(json => json.map((catObj) => `<option value="${catObj.id}">${catObj.name}</option>`))
+            .then(json => json.data.map(({attributes}) => `<option value="${attributes.id}">${attributes.name}</option>`))
             .then(collection => document.querySelector("select#category_id").innerHTML = collection.join(" "))
+    }
 }
+
 
 
 const handleClick = () => {
