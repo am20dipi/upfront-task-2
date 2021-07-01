@@ -14,8 +14,7 @@ UPFRONT utilizes a Ruby on Rails backend and a JavaScript frontend.
 
 # Usage
 
-After opening the browser, type a task in the input task bar. Click 'Create Task' button to add the task to the browser page. The prompt will then make available both 'Edit' and 'Delete' buttons for each task created. A user has an option to "filter" tasks by their status: 'completed', 'active' or 'all'. A user has the option to check off tasks, as well. 
-
+After opening the browser, type a task in the input task bar. Click 'Create Task' button to add the task to the browser page. The prompt will then make available both 'Edit' and 'Delete' buttons for each task created. A user has the option to check off tasks via the 'Done!', as well. A user has an option to "filter" tasks by their status: 'completed', 'active' or 'all'. A user can also filter the tasks by category: 'Work', 'Miscellaneous', 'School'. 
 
 # Contributing + License
 

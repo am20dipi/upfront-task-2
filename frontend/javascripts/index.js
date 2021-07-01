@@ -7,7 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
     schoolTasks().addEventListener("click", TaskApi.handleSchoolTasks)
     workTasks().addEventListener("click", TaskApi.handleWorkTasks)
     dropDown().addEventListener("click", CategoryApi.fetchCategoriesForSelect)
+    changeBackground().addEventListener("click", renderNewBackground)
 })
+
+const renderNewBackground = () => {
+    document.body.style.background = (document.body.style.background === 'black') ? 'white' : 'black'
+    changeBackground.clicked = !changeBackground.clicked
+    // Using a Ternary => if the condition is truthful
+    // If it is true, upon clicking, turn it white
+    // If it is false, upon clicking, turn it black
+
+    // Bang Operator: convert to opposite boolean val. 
+    // the button clicked is what you previously clicked 
+    // If the first result happened, then the second result can happen upon clicking
+}
 
 
 const handleSubmit = (e) => {
@@ -59,7 +72,7 @@ const appendTask = (task) => {
 
 
 const handleClick = () => {
-    if (taskTable().children.length < 10) {
+    if (taskTable().children.length < 4) {
         taskTable().innerHTML = " "
         TaskApi.fetchTasks()
     } else {
